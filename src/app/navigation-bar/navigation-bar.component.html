@@ -1,6 +1,11 @@
 <nav class="bg-blue-500 p-4 text-white">
   <ul class="flex space-x-4">
     <li><a routerLink="/dashboard" class="hover:underline">Dashboard</a></li>
-    <li><a routerLink="/login" class="hover:underline">Login</a></li>
+    <li><a routerLink="/profile" class="hover:underline">My profile</a></li>
+    <li>
+      <a routerLink="/logout" class="hover:underline" (click)="logoutUser()"
+        >Logout</a
+      >
+    </li>
   </ul>
 </nav>

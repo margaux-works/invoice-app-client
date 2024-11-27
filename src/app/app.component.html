@@ -1,3 +1,6 @@
+<!-- Only show NavBarComponent if not on welcome page -->
+<app-navigation-bar *ngIf="showNavbar"></app-navigation-bar>
+
 <router-outlet></router-outlet>
 
 <app-toast></app-toast>
