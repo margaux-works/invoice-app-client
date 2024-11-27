@@ -1,0 +1,63 @@
+<div class="h-screen flex flex-col items-center justify-center bg-gray-50">
+  <h1 class="text-4xl font-bold text-gray-800 mb-6">
+    Welcome to your Invoice App
+  </h1>
+
+  <div class="flex space-x-4">
+    <!-- Sign Up Button -->
+    <button
+      class="bg-blue-600 text-white px-6 py-2 rounded-md shadow-md hover:bg-blue-700 focus:outline-none"
+      (click)="openRegistrationModal()"
+    >
+      Sign Up
+    </button>
+
+    <!-- Login Button -->
+    <button
+      class="bg-green-600 text-white px-6 py-2 rounded-md shadow-md hover:bg-green-700 focus:outline-none"
+      (click)="openLoginModal()"
+    >
+      Login
+    </button>
+  </div>
+
+  <!-- Login Modal -->
+  <div
+    *ngIf="isLoginModalOpen"
+    class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center"
+  >
+    <div
+      class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md"
+      role="dialog"
+    >
+      <h2 class="text-xl font-bold text-gray-800 mb-4">Login</h2>
+      <app-user-login-form></app-user-login-form>
+      <button
+        class="mt-4 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700"
+        (click)="closeModal()"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+
+  <!-- Registration Modal -->
+  <div
+    *ngIf="isRegistrationModalOpen"
+    class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center"
+  >
+    <div
+      class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md"
+      role="dialog"
+    >
+      <h2 class="text-xl font-bold text-gray-800 mb-4">Sign Up</h2>
+      <app-user-registration-form></app-user-registration-form>
+      <button
+        class="mt-4 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700"
+        (click)="closeModal()"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</div>
