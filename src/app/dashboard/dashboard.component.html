@@ -3,8 +3,9 @@
   <div *ngIf="invoices.length > 0; else noInvoices">
     <div *ngFor="let invoice of invoices" class="invoice-card">
       <h2>Invoice #{{ invoice.id }}</h2>
-      <p>Customer: {{ invoice.customerName }}</p>
-      <p>Amount: {{ invoice.amount | currency }}</p>
+      <p>Payment Due: {{ invoice.paymentDue | date : "dd MMM yyyy" }}</p>
+      <p>Client: {{ invoice.clientName }}</p>
+      <p>Amount: {{ invoice.total | currency }}</p>
       <p>Status: {{ invoice.status }}</p>
     </div>
   </div>
