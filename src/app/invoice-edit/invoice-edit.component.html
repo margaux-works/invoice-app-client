@@ -1,0 +1,15 @@
+<div class="edit-panel">
+  <form [formGroup]="invoiceForm" (ngSubmit)="saveChanges()">
+    <label>Client Name</label>
+    <input formControlName="clientName" />
+
+    <label>Payment Terms</label>
+    <input formControlName="paymentTerms" />
+
+    <label>Total</label>
+    <input formControlName="total" />
+
+    <button type="submit">Save</button>
+    <button type="button" (click)="cancel.emit()">Cancel</button>
+  </form>
+</div>

@@ -1,1 +1,20 @@
-<p>invoice-details works!</p>
+<div *ngIf="invoice" class="invoice-details">
+  <!-- View Mode -->
+  <ng-container *ngIf="!isEditing; else editMode">
+    <app-invoice-view
+      [invoice]="invoice"
+      (edit)="toggleEdit()"
+      (markAsPaid)="markAsPaid()"
+      (delete)="deleteInvoice()"
+    ></app-invoice-view>
+  </ng-container>
+
+  <!-- Edit Mode -->
+  <ng-template #editMode>
+    <app-invoice-edit
+      [invoice]="invoice"
+      (cancel)="toggleEdit()"
+      (save)="saveChanges($event)"
+    ></app-invoice-edit>
+  </ng-template>
+</div>

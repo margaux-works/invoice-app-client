@@ -1,0 +1,95 @@
+<div class="invoice-view m-8">
+  <button [routerLink]="['/dashboard']">Go back</button>
+  <div
+    class="flex flex-row border-solid border-1 bg-gray-100 rounded-sm p-4 my-20"
+  >
+    <p>Status {{ invoice.status }}</p>
+    <button
+      (click)="edit.emit()"
+      class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 mx-4 rounded"
+    >
+      Edit
+    </button>
+    <button
+      (click)="delete.emit()"
+      class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-4 rounded"
+    >
+      Delete
+    </button>
+    <button
+      (click)="markAsPaid.emit()"
+      [disabled]="invoice.status === 'paid'"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-4 rounded"
+    >
+      Mark as Paid
+    </button>
+  </div>
+  <div class="bg-gray-100 rounded-sm p-4">
+    <div class="grid grid-cols-2">
+      <div>
+        <h1 class="font-bold">
+          <span class="text-gray-500">#</span>{{ invoice.id }}
+        </h1>
+        <p>{{ invoice.description }}</p>
+      </div>
+      <div>
+        <p>{{ invoice.senderAddress.street }}</p>
+        <p>{{ invoice.senderAddress.city }}</p>
+        <p>{{ invoice.senderAddress.postCode }}</p>
+        <p>{{ invoice.senderAddress.country }}</p>
+      </div>
+    </div>
+    <div class="grid grid-cols-3 mt-8">
+      <div>
+        <p class="text-gray-500">Invoice Date</p>
+        <p class="font-bold">{{ invoice.createdAt | date : "dd MMM yyyy" }}</p>
+        <p class="text-gray-500 mt-8">Payment Due</p>
+        <p class="font-bold">{{ invoice.paymentDue | date : "dd MMM yyyy" }}</p>
+      </div>
+      <div>
+        <p class="text-gray-500">Bill to</p>
+        <p class="font-bold">{{ invoice.clientName }}</p>
+        <p class="text-gray-500">{{ invoice.clientAddress.street }}</p>
+        <p class="text-gray-500">{{ invoice.clientAddress.city }}</p>
+        <p class="text-gray-500">{{ invoice.clientAddress.postCode }}</p>
+        <p class="text-gray-500">{{ invoice.clientAddress.country }}</p>
+      </div>
+      <div>
+        <p class="text-gray-500">Sent to</p>
+        <p class="font-bold">{{ invoice.clientEmail }}</p>
+      </div>
+    </div>
+    <!-- Table for Items -->
+    <div class="bg-gray-100 rounded-sm p-4 my-4">
+      <table
+        class="table-auto border-collapse border border-gray-500 w-full text-left"
+      >
+        <!-- Table Header -->
+        <thead>
+          <tr class="bg-gray-200">
+            <th class="border border-gray-400 px-4 py-2">Item Name</th>
+            <th class="border border-gray-400 px-4 py-2">QTY</th>
+            <th class="border border-gray-400 px-4 py-2">Price</th>
+            <th class="border border-gray-400 px-4 py-2">Total</th>
+          </tr>
+        </thead>
+        <!-- Table Body -->
+        <tbody>
+          <tr *ngFor="let item of invoice.items">
+            <td class="border border-gray-400 px-4 py-2">{{ item.name }}</td>
+            <td class="border border-gray-400 px-4 py-2">
+              {{ item.quantity }}
+            </td>
+            <td class="border border-gray-400 px-4 py-2">
+              {{ item.price | currency }}
+            </td>
+            <td class="border border-gray-400 px-4 py-2">
+              {{ item.total | currency }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Total: {{ invoice.total | currency }}</p>
+  </div>
+</div>
