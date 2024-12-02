@@ -71,10 +71,33 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
+  public markInvoiceAsPaid(id: string): Observable<any> {
+    return this.http
+      .patch(
+        apiUrl + `invoices/${id}/mark-as-paid`,
+        {},
+        { headers: this.getHeaders() }
+      )
+      .pipe(
+        catchError((error) => {
+          console.error(
+            `Error marking invoice as paid:`,
+            error.message || error
+          );
+          return throwError(
+            () => new Error('Failed to mark invoice as paid; please try again.')
+          );
+        })
+      );
+  }
+
   // Delete an invoice
   public deleteInvoice(id: string): Observable<any> {
     return this.http
-      .delete(apiUrl + `invoices/${id}`, { headers: this.getHeaders() })
+      .delete(apiUrl + `invoices/${id}`, {
+        headers: this.getHeaders(),
+        responseType: 'text',
+      })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
