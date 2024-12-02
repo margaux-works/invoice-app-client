@@ -3,26 +3,26 @@
   <p *ngIf="invoices.length > 0" class="mb-20">
     There are {{ invoices.length }} total invoices
   </p>
-  <div
-    class="grid grid-rows-8 gap-4"
-    *ngIf="invoices.length > 0; else noInvoices"
-  >
+  <div *ngIf="invoices.length > 0; else noInvoices">
     <button>New Invoice</button>
 
-    <div
-      *ngFor="let invoice of invoices"
-      class="invoice-card grid grid-cols-6 items-center border-blue-700 border p-4 rounded-md"
-    >
-      <h2 class="text-lg font-medium">Invoice #{{ invoice.id }}</h2>
-      <p class="text-sm text-gray-500">
-        Due {{ invoice.paymentDue | date : "dd MMM yyyy" }}
-      </p>
-      <p class="text-sm text-gray-500">{{ invoice.clientName }}</p>
-      <p class="text-sm font-bold">{{ invoice.total | currency }}</p>
-      <p class="text-sm">{{ invoice.status }}</p>
-      <button [routerLink]="['/invoice', invoice.id]">See more</button>
+    <div *ngIf="invoices.length > 0; else noInvoices" class="grid gap-4">
+      <div
+        *ngFor="let invoice of invoices"
+        class="invoice-card grid grid-cols-6 items-center border-blue-700 border p-4 rounded-md"
+      >
+        <h2 class="text-lg font-medium">Invoice #{{ invoice.id }}</h2>
+        <p class="text-sm text-gray-500">
+          Due {{ invoice.paymentDue | date : "dd MMM yyyy" }}
+        </p>
+        <p class="text-sm text-gray-500">{{ invoice.clientName }}</p>
+        <p class="text-sm font-bold">{{ invoice.total | currency }}</p>
+        <p class="text-sm">{{ invoice.status }}</p>
+        <button [routerLink]="['/invoice', invoice.id]">See more</button>
+      </div>
     </div>
   </div>
+
   <ng-template #noInvoices>
     <h2>There is nothing here</h2>
     <p>

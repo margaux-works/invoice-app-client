@@ -1,15 +1,144 @@
-<div class="edit-panel">
+<div class="edit-panel mx-8 p-4 bg-white shadow-md rounded-lg">
+  <h2 class="text-xl font-bold mb-4">Edit Invoice #{{ invoice.id }}</h2>
+
   <form [formGroup]="invoiceForm" (ngSubmit)="saveChanges()">
-    <label>Client Name</label>
-    <input formControlName="clientName" />
+    <div class="mb-4">
+      <h3 class="text-lg font-semibold mb-2">Bill From</h3>
+      <div formGroupName="senderAddress">
+        <div class="space-y-2">
+          <label>Street Address</label>
+          <input formControlName="street" class="input-field" />
+          <div class="grid grid-cols-3 gap-4">
+            <div>
+              <label>City</label>
+              <input formControlName="city" class="input-field" />
+            </div>
+            <div>
+              <label>Post Code</label>
+              <input formControlName="postCode" class="input-field" />
+            </div>
+            <div>
+              <label>Country</label>
+              <input formControlName="country" class="input-field" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <label>Payment Terms</label>
-    <input formControlName="paymentTerms" />
+    <div class="mb-4">
+      <h3 class="text-lg font-semibold mb-2">Bill To</h3>
+      <div>
+        <label>Client Name</label>
+        <input formControlName="clientName" class="input-field" />
+      </div>
+      <div>
+        <label>Client Email</label>
+        <input formControlName="clientEmail" type="email" class="input-field" />
+      </div>
+    </div>
 
-    <label>Total</label>
-    <input formControlName="total" />
+    <div class="mb-4">
+      <div formGroupName="clientAddress">
+        <div class="space-y-2">
+          <label>Street Address</label>
+          <input formControlName="street" class="input-field" />
+          <div class="grid grid-cols-3 gap-4">
+            <div>
+              <label>City</label>
+              <input formControlName="city" class="input-field" />
+            </div>
+            <div>
+              <label>Post Code</label>
+              <input formControlName="postCode" class="input-field" />
+            </div>
+            <div>
+              <label>Country</label>
+              <input formControlName="country" class="input-field" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <button type="submit">Save</button>
-    <button type="button" (click)="cancel.emit()">Cancel</button>
+    <div class="grid grid-cols-2 gap-4">
+      <div class="mb-4">
+        <label>Invoice Date</label>
+        <input
+          formControlName="createdAt"
+          type="text"
+          class="input-field bg-gray-200 cursor-not-allowed"
+          readonly
+        />
+      </div>
+
+      <div class="mb-4">
+        <label>Payment Terms</label>
+        <input
+          formControlName="paymentTerms"
+          type="number"
+          class="input-field"
+        />
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label>Project Description</label>
+      <input formControlName="description" class="input-field" />
+    </div>
+
+    <div class="mb-4">
+      <label>Item List</label>
+      <table class="table-auto w-full border-collapse border border-gray-400">
+        <thead>
+          <tr class="bg-gray-200">
+            <th class="border border-gray-400 px-4 py-2">Item Name</th>
+            <th class="border border-gray-400 px-4 py-2">QTY</th>
+            <th class="border border-gray-400 px-4 py-2">Price</th>
+            <th class="border border-gray-400 px-4 py-2">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let item of items.controls; let i = index"
+            [formGroup]="item"
+          >
+            <td class="border border-gray-400 px-4 py-2">
+              <input formControlName="name" class="input-field" />
+            </td>
+            <td class="border border-gray-400 px-4 py-2">
+              <input
+                formControlName="quantity"
+                type="number"
+                class="input-field"
+              />
+            </td>
+            <td class="border border-gray-400 px-4 py-2">
+              <input
+                formControlName="price"
+                type="number"
+                class="input-field"
+              />
+            </td>
+            <td class="border border-gray-400 px-4 py-2">
+              <input
+                formControlName="total"
+                type="number"
+                class="input-field"
+                readonly
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <button type="submit">Save</button>
+
+      <button type="button" class="btn btn-secondary" (click)="cancel.emit()">
+        Cancel
+      </button>
+    </div>
   </form>
 </div>
