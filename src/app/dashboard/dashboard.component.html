@@ -17,7 +17,7 @@
     <!-- Conditionally Show Create Invoice Form -->
     <app-invoice-create
       *ngIf="showCreateInvoice"
-      (create)="onCreateInvoice($event)"
+      (save)="onInvoiceSaved()"
       (cancel)="onCancelInvoiceCreation()"
     ></app-invoice-create>
 

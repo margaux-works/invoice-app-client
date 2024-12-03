@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { FetchApiDataService } from '../services/fetch-api-data.service';
 import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-invoice-create',
@@ -15,101 +16,124 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './invoice-create.component.html',
   styleUrls: ['./invoice-create.component.scss'],
+  providers: [DatePipe],
 })
 export class InvoiceCreateComponent {
-  @Output() create = new EventEmitter<void>();
-  @Output() canceled = new EventEmitter<void>();
+  @Output() save = new EventEmitter<void>();
+  @Output() cancel = new EventEmitter<void>();
 
   invoiceForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
-  ngOnInit(): void {
+  constructor(
+    private fb: FormBuilder,
+    private apiService: FetchApiDataService
+  ) {
     this.invoiceForm = this.fb.group({
       senderAddress: this.fb.group({
-        street: ['', Validators.required],
-        city: ['', Validators.required],
-        postCode: ['', Validators.required],
-        country: ['', Validators.required],
-      }),
-      clientAddress: this.fb.group({
-        street: ['', Validators.required],
-        city: ['', Validators.required],
-        postCode: ['', Validators.required],
-        country: ['', Validators.required],
+        street: [''],
+        city: [''],
+        postCode: [''],
+        country: [''],
       }),
       clientName: ['', Validators.required],
       clientEmail: ['', [Validators.required, Validators.email]],
-      createdAt: [new Date()],
-      paymentTerms: [0, Validators.required],
+      clientAddress: this.fb.group({
+        street: [''],
+        city: [''],
+        postCode: [''],
+        country: [''],
+      }),
+      createdAt: [new Date().toISOString().split('T')[0], Validators.required],
+      paymentTerms: [30, Validators.required],
       description: ['', Validators.required],
-      items: this.fb.array([this.createItemGroup()]),
-      total: [0],
-      status: ['draft'],
+      items: this.fb.array([]),
+      total: [{ value: 0, disabled: true }],
     });
   }
+
+  ngOnInit(): void {}
 
   get items(): FormArray {
     return this.invoiceForm.get('items') as FormArray;
   }
 
-  createItemGroup(): FormGroup {
-    return this.fb.group({
+  addItem() {
+    const itemGroup = this.fb.group({
       name: ['', Validators.required],
       quantity: [1, [Validators.required, Validators.min(1)]],
       price: [0, [Validators.required, Validators.min(0)]],
       total: [{ value: 0, disabled: true }],
     });
-  }
-
-  addItem(): void {
-    this.items.push(this.createItemGroup());
+    this.items.push(itemGroup);
   }
 
   removeItem(index: number): void {
     this.items.removeAt(index);
+    this.updateTotal();
   }
 
-  calculateTotal(): number {
-    return this.items.controls.reduce((total, item) => {
-      const quantity = item.get('quantity')?.value || 0;
-      const price = item.get('price')?.value || 0;
-      return total + quantity * price;
+  calculateTotal(index: number) {
+    const item = this.items.at(index);
+    const quantity = item.get('quantity')?.value || 0;
+    const price = item.get('price')?.value || 0;
+    item.get('total')?.setValue(quantity * price);
+    this.updateTotal();
+  }
+
+  updateTotal() {
+    const total = this.items.controls.reduce((sum, item) => {
+      return sum + (item.get('total')?.value || 0);
     }, 0);
+    this.invoiceForm.get('total')?.setValue(total);
   }
 
-  generateId(): string {
-    const letters = Array.from({ length: 2 }, () =>
-      String.fromCharCode(65 + Math.floor(Math.random() * 26))
-    ).join('');
-    const numbers = Math.floor(1000 + Math.random() * 9000).toString();
-    return letters + numbers;
+  saveAsDraft() {
+    const payload = this.invoiceForm.getRawValue();
+    payload.status = 'draft';
+    if (!payload.id) {
+      payload.id = this.generateInvoiceId();
+    }
+    this.apiService.createInvoice(payload).subscribe({
+      next: () => this.save.emit(),
+      error: (err) => console.error('Failed to save draft:', err),
+    });
   }
 
-  submitInvoice(): void {
+  submitInvoice() {
     if (this.invoiceForm.invalid) {
-      this.invoiceForm.markAllAsTouched();
+      console.error('Form is invalid');
       return;
     }
 
-    const formValue = this.invoiceForm.getRawValue();
-    formValue.id = this.generateId();
+    const payload = this.invoiceForm.getRawValue();
+    payload.status = 'pending';
+    payload.id = this.generateInvoiceId();
+    payload.paymentDue = this.calculatePaymentDue(
+      payload.createdAt,
+      payload.paymentTerms
+    );
 
-    if (formValue.status === '') {
-      formValue.status = 'pending';
-    }
-
-    this.create.emit(formValue);
+    this.apiService.createInvoice(payload).subscribe({
+      next: () => this.save.emit(),
+      error: (err) => console.error('Failed to save invoice:', err),
+    });
   }
 
-  saveAsDraft(): void {
-    const formValue = this.invoiceForm.getRawValue();
-    formValue.id = this.generateId();
-    formValue.status = 'draft';
-    this.create.emit(formValue);
+  cancelCreation() {
+    this.cancel.emit();
+  }
+  generateInvoiceId(): string {
+    const letters = Array(2)
+      .fill('')
+      .map(() => String.fromCharCode(65 + Math.floor(Math.random() * 26)))
+      .join('');
+    const numbers = Math.floor(1000 + Math.random() * 9000);
+    return `${letters}${numbers}`;
   }
 
-  cancelCreation(): void {
-    console.log('Invoice Creation Canceled');
-    this.canceled.emit();
+  calculatePaymentDue(createdAt: string, paymentTerms: number): string {
+    const createdDate = new Date(createdAt);
+    createdDate.setDate(createdDate.getDate() + paymentTerms);
+    return createdDate.toISOString().split('T')[0];
   }
 }
