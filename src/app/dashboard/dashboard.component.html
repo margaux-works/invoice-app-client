@@ -1,10 +1,27 @@
 <div class="dashboard m-8">
   <h1>Invoice Dashboard</h1>
-  <p *ngIf="invoices.length > 0" class="mb-20">
+  <p *ngIf="invoices.length > 0" class="mb-4">
     There are {{ invoices.length }} total invoices
   </p>
   <div *ngIf="invoices.length > 0; else noInvoices">
-    <button>New Invoice</button>
+    <!-- Debugging Output -->
+    <p>Debug: showCreateInvoice is {{ showCreateInvoice }}</p>
+
+    <button
+      (click)="openCreateInvoiceForm()"
+      class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 m-4 rounded"
+    >
+      New Invoice
+    </button>
+
+    <!-- Conditionally Show Create Invoice Form -->
+    <app-invoice-create
+      *ngIf="showCreateInvoice"
+      (create)="onCreateInvoice($event)"
+      (cancel)="onCancelInvoiceCreation()"
+    ></app-invoice-create>
+
+    <!-- List of Invoices -->
 
     <div *ngIf="invoices.length > 0; else noInvoices" class="grid gap-4">
       <div
