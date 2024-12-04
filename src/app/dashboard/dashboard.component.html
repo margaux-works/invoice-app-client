@@ -1,12 +1,9 @@
 <div class="dashboard m-8">
-  <h1>Invoice Dashboard</h1>
+  <h1>Invoices</h1>
   <p *ngIf="invoices.length > 0" class="mb-4">
     There are {{ invoices.length }} total invoices
   </p>
   <div *ngIf="invoices.length > 0; else noInvoices">
-    <!-- Debugging Output -->
-    <p>Debug: showCreateInvoice is {{ showCreateInvoice }}</p>
-
     <button
       (click)="openCreateInvoiceForm()"
       class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 m-4 rounded"
@@ -21,11 +18,41 @@
       (cancel)="onCancelInvoiceCreation()"
     ></app-invoice-create>
 
+    <!-- BEGIN: Filter Dropdown -->
+    <div class="relative inline-block">
+      <button
+        (click)="toggleFilterDropdown()"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Filter by Status
+      </button>
+      <div
+        *ngIf="showFilterDropdown"
+        class="absolute bg-white shadow-md rounded mt-2 p-4"
+      >
+        <label
+          *ngFor="let status of ['draft', 'pending', 'paid']"
+          class="block mb-2"
+        >
+          <input
+            type="checkbox"
+            [value]="status"
+            (change)="onStatusChange(status, $event.target.checked)"
+          />
+          {{ status | titlecase }}
+        </label>
+      </div>
+    </div>
+    <!-- END: Filter Dropdown -->
+
     <!-- List of Invoices -->
 
-    <div *ngIf="invoices.length > 0; else noInvoices" class="grid gap-4">
+    <div
+      *ngIf="filteredInvoices.length > 0; else noInvoices"
+      class="grid gap-4"
+    >
       <div
-        *ngFor="let invoice of invoices"
+        *ngFor="let invoice of filteredInvoices"
         class="invoice-card grid grid-cols-6 items-center border-blue-700 border p-4 rounded-md"
       >
         <h2 class="text-lg font-medium">Invoice #{{ invoice.id }}</h2>
