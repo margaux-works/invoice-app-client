@@ -1,29 +1,22 @@
 <div class="dashboard m-8">
-  <h1>Invoices</h1>
-  <p *ngIf="invoices.length > 0" class="mb-4">
-    There are {{ invoices.length }} total invoices
-  </p>
-  <div *ngIf="invoices.length > 0; else noInvoices">
-    <button
-      (click)="openCreateInvoiceForm()"
-      class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 m-4 rounded"
-    >
-      New Invoice
-    </button>
-
-    <!-- Conditionally Show Create Invoice Form -->
-    <app-invoice-create
-      *ngIf="showCreateInvoice"
-      (save)="onInvoiceSaved()"
-      (cancel)="onCancelInvoiceCreation()"
-    ></app-invoice-create>
-
+  <div class="head-container grid grid-cols-3">
+    <div>
+      <h1 class="text-3xl font-bold">Invoices</h1>
+      <p *ngIf="invoices.length > 0" class="mb-4 text-sm text-gray">
+        There are {{ invoices.length }} total invoices
+      </p>
+      <div *ngIf="invoices.length > 0; else noInvoices">
+        <!-- Conditionally Show Create Invoice Form -->
+        <app-invoice-create
+          *ngIf="showCreateInvoice"
+          (save)="onInvoiceSaved()"
+          (cancel)="onCancelInvoiceCreation()"
+        ></app-invoice-create>
+      </div>
+    </div>
     <!-- BEGIN: Filter Dropdown -->
     <div class="relative inline-block">
-      <button
-        (click)="toggleFilterDropdown()"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
+      <button (click)="toggleFilterDropdown()" class="font-bold py-2 px-4">
         Filter by Status
       </button>
       <div
@@ -45,25 +38,49 @@
     </div>
     <!-- END: Filter Dropdown -->
 
-    <!-- List of Invoices -->
-
-    <div
-      *ngIf="filteredInvoices.length > 0; else noInvoices"
-      class="grid gap-4"
+    <button
+      (click)="openCreateInvoiceForm()"
+      class="bg-purple hover:bg-purple-light text-white font-bold m-4 rounded-lg"
     >
+      New Invoice
+    </button>
+  </div>
+
+  <!-- List of Invoices -->
+
+  <div *ngIf="filteredInvoices.length > 0; else noInvoices" class="grid gap-4">
+    <div
+      *ngFor="let invoice of filteredInvoices"
+      class="invoice-card grid grid-cols-6 items-center bg-white shadow-sm p-4 rounded-md"
+    >
+      <h2 class="text-lg font-bold">
+        <span class="text-gray font-bold">#</span>{{ invoice.id }}
+      </h2>
+      <p class="text-sm text-gray">
+        Due {{ invoice.paymentDue | date : "dd MMM yyyy" }}
+      </p>
+      <p class="text-sm text-gray">{{ invoice.clientName }}</p>
+      <p class="text-sm font-bold">{{ invoice.total | currency }}</p>
+      <!-- Dynamic Status -->
       <div
-        *ngFor="let invoice of filteredInvoices"
-        class="invoice-card grid grid-cols-6 items-center border-blue-700 border p-4 rounded-md"
+        class="flex items-center justify-center gap-2 px-4 py-2 rounded-full font-bold w-full"
+        [ngClass]="{
+          'bg-green-100 text-green': invoice.status === 'paid',
+          'bg-orange-100 text-orange': invoice.status === 'pending',
+          'bg-gray-100 text-gray': invoice.status === 'draft'
+        }"
       >
-        <h2 class="text-lg font-medium">Invoice #{{ invoice.id }}</h2>
-        <p class="text-sm text-gray-500">
-          Due {{ invoice.paymentDue | date : "dd MMM yyyy" }}
-        </p>
-        <p class="text-sm text-gray-500">{{ invoice.clientName }}</p>
-        <p class="text-sm font-bold">{{ invoice.total | currency }}</p>
-        <p class="text-sm">{{ invoice.status }}</p>
-        <button [routerLink]="['/invoice', invoice.id]">See more</button>
+        <span
+          class="w-2 h-2 rounded-full"
+          [ngClass]="{
+            'bg-green-600': invoice.status === 'paid',
+            'bg-orange-600': invoice.status === 'pending',
+            'bg-gray-600': invoice.status === 'draft'
+          }"
+        ></span>
+        {{ invoice.status | titlecase }}
       </div>
+      <button [routerLink]="['/invoice', invoice.id]">See more</button>
     </div>
   </div>
 
