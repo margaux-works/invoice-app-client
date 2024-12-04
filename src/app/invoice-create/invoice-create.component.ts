@@ -93,6 +93,11 @@ export class InvoiceCreateComponent {
     if (!payload.id) {
       payload.id = this.generateInvoiceId();
     }
+    payload.paymentDue = this.calculatePaymentDue(
+      payload.createdAt,
+      payload.paymentTerms
+    );
+
     this.apiService.createInvoice(payload).subscribe({
       next: () => this.save.emit(),
       error: (err) => console.error('Failed to save draft:', err),
