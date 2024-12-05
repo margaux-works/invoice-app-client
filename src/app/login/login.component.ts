@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FetchApiDataService } from '../services/fetch-api-data.service';
 import { Router } from '@angular/router';
 import { ToastService } from '../services/toast.service'; // Import ToastService
@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./login.component.scss'],
 })
 export class UserLoginFormComponent implements OnInit {
+  @Output() closeModal = new EventEmitter<void>();
+
   userData = { username: '', password: '' };
 
   constructor(

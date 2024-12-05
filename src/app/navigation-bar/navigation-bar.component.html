@@ -1,15 +1,59 @@
-<nav class="bg-blue-500 p-4 text-white">
-  <ul class="flex space-x-4">
-    <li>
-      <button [routerLink]="['/dashboard']" class="hover:underline">
-        Dashboard
-      </button>
-    </li>
-    <li><a class="hover:underline">My profile</a></li>
-    <li>
-      <a routerLink="/logout" class="hover:underline" (click)="logoutUser()"
-        >Logout</a
+<nav
+  class="bg-black-light flex flex-col h-screen fixed top-0 left-0 w-20 lg:w-103"
+>
+  <!-- Logo -->
+  <div class="flex items-center justify-center h-16 lg:h-24">
+    <img
+      src="path-to-your-logo.png"
+      alt="Logo"
+      class="h-10 w-10 lg:h-16 lg:w-16"
+      [routerLink]="['/dashboard']"
+    />
+  </div>
+
+  <!-- Dark/Light Mode and Logout -->
+  <div class="flex flex-col items-center lg:items-start space-y-4 p-4 mt-auto">
+    <!-- Dark/Light Mode -->
+    <button class="p-2 bg-gray-700 rounded-full hover:bg-gray-600">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 text-white"
+        viewBox="0 0 20 20"
+        fill="currentColor"
       >
-    </li>
-  </ul>
+        <path d="M10 2a8 8 0 100 16 8 8 0 000-16z" />
+      </svg>
+    </button>
+
+    <!-- Logout -->
+    <div class="relative">
+      <button
+        class="p-2 bg-gray-700 rounded-full hover:bg-gray-600"
+        (click)="toggleLogoutBox()"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 text-white"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M17 16l4-4m0 0l-4-4m4 4H7"
+          />
+        </svg>
+      </button>
+      <div
+        *ngIf="showLogOutBox"
+        class="absolute bottom-full right-0 mb-2 p-2 bg-gray-800 rounded shadow-lg"
+      >
+        <button (click)="logoutUser()" class="text-white hover:underline">
+          Log Out
+        </button>
+      </div>
+    </div>
+  </div>
 </nav>

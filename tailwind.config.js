@@ -27,6 +27,10 @@ module.exports = {
           light: "##373B530F",
           DEFAULT: "##373B53",
         },
+        black: {
+          light: "#252945",
+          DEFAULT: "#1E2139",
+        },
         lightBg: "#F8F8FB",
         darkBg: "#141625",
       },

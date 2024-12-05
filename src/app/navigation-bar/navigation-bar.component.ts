@@ -12,6 +12,7 @@ import { ToastService } from '../services/toast.service';
 })
 export class NavigationBarComponent {
   constructor(private router: Router, private toastService: ToastService) {}
+  showLogOutBox = false;
 
   ngOnInit(): void {}
 
@@ -20,5 +21,9 @@ export class NavigationBarComponent {
 
     this.toastService.showToast('Logged out successfully!');
     this.router.navigate(['welcome']);
+  }
+
+  toggleLogoutBox() {
+    this.showLogOutBox = !this.showLogOutBox;
   }
 }
