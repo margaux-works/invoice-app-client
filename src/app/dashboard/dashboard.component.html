@@ -1,4 +1,4 @@
-<div class="dashboard m-8">
+<div class="dashboard my-20 mx-60">
   <div class="head-container grid grid-cols-3">
     <div>
       <h1 class="text-3xl font-bold">Invoices</h1>
@@ -48,7 +48,10 @@
 
   <!-- List of Invoices -->
 
-  <div *ngIf="filteredInvoices.length > 0; else noInvoices" class="grid gap-4">
+  <div
+    *ngIf="filteredInvoices.length > 0; else noInvoices"
+    class="grid gap-4 mt-16"
+  >
     <div
       *ngFor="let invoice of filteredInvoices"
       class="invoice-card grid grid-cols-6 items-center bg-white shadow-sm p-4 rounded-md"
