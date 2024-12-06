@@ -1,95 +1,134 @@
-<div class="invoice-view m-8">
-  <button [routerLink]="['/dashboard']">Go back</button>
+<div class="invoice-view m-16">
+  <button [routerLink]="['/dashboard']" class="font-semibold">
+    <img
+      src="/icons/Path 2-left.svg"
+      alt="Back Icon"
+      class="inline-flex p-2"
+    />Go back
+  </button>
   <div
-    class="flex flex-row border-solid border-1 bg-gray-100 rounded-sm p-4 my-20"
+    class="head-container flex-row flex items-center justify-between bg-white p-4 mt-8 mb-6 w-128 rounded-md shadow-custom-light"
   >
-    <p>Status {{ invoice.status }}</p>
-    <button
-      (click)="edit.emit()"
-      class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 mx-4 rounded"
+    <p class="text-gray-500 justify-center align-middle pl-2 pr-4 text-sm">
+      Status
+    </p>
+    <div
+      class="flex items-center justify-center gap-2 px-4 py-2 rounded-md text-sm font-bold w-[104px] h-[40px]whitespace-nowrap"
+      [ngClass]="{
+        'bg-green-100 text-green': invoice.status === 'paid',
+        'bg-orange-100 text-orange': invoice.status === 'pending',
+        'bg-gray-100 text-gray': invoice.status === 'draft'
+      }"
     >
-      Edit
-    </button>
-    <button
-      (click)="delete.emit()"
-      class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-4 rounded"
-    >
-      Delete
-    </button>
-    <button
-      (click)="markAsPaid.emit()"
-      [disabled]="invoice.status === 'paid'"
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-4 rounded"
-    >
-      Mark as Paid
-    </button>
+      <span
+        class="w-2 h-2 rounded-full text-base"
+        [ngClass]="{
+          'bg-green-600': invoice.status === 'paid',
+          'bg-orange-600': invoice.status === 'pending',
+          'bg-gray-600': invoice.status === 'draft'
+        }"
+      ></span>
+      {{ invoice.status | titlecase }}
+    </div>
+
+    <div class="flex items-center ml-auto gap-2 pr-4">
+      <button
+        (click)="edit.emit()"
+        class="bg-slate-100 hover:bg-slate-200 text-slate-400 font-medium py-2 px-4 mx-2 rounded-3xl"
+      >
+        Edit
+      </button>
+      <button
+        (click)="delete.emit()"
+        class="bg-red hover:bg-red-light text-white font-medium py-2 px-4 mx-2 rounded-3xl"
+      >
+        Delete
+      </button>
+      <button
+        (click)="markAsPaid.emit()"
+        [disabled]="invoice.status === 'paid'"
+        class="bg-purple hover:bg-purple-light text-white rounded-3xl py-2 px-4 mx-2 font-medium"
+      >
+        Mark as Paid
+      </button>
+    </div>
   </div>
-  <div class="bg-gray-100 rounded-sm p-4">
+
+  <div
+    class="bg-white rounded-md invoice-container shadow-custom-light w-128 p-12"
+  >
     <div class="grid grid-cols-2">
       <div>
         <h1 class="font-bold">
-          <span class="text-gray-500">#</span>{{ invoice.id }}
+          <span class="text-gray-700">#</span>{{ invoice.id }}
         </h1>
         <p>{{ invoice.description }}</p>
       </div>
-      <div>
-        <p>{{ invoice.senderAddress.street }}</p>
-        <p>{{ invoice.senderAddress.city }}</p>
-        <p>{{ invoice.senderAddress.postCode }}</p>
-        <p>{{ invoice.senderAddress.country }}</p>
+      <div class="col-end-8">
+        <p class="text-gray-700">{{ invoice.senderAddress.street }}</p>
+        <p class="text-gray-700">{{ invoice.senderAddress.city }}</p>
+        <p class="text-gray-700">{{ invoice.senderAddress.postCode }}</p>
+        <p class="text-gray-700">{{ invoice.senderAddress.country }}</p>
       </div>
     </div>
     <div class="grid grid-cols-3 mt-8">
       <div>
-        <p class="text-gray-500">Invoice Date</p>
+        <p class="text-gray-700 pb-3.5">Invoice Date</p>
         <p class="font-bold">{{ invoice.createdAt | date : "dd MMM yyyy" }}</p>
-        <p class="text-gray-500 mt-8">Payment Due</p>
+        <p class="text-gray-700 mt-8 pb-3.5">Payment Due</p>
         <p class="font-bold">{{ invoice.paymentDue | date : "dd MMM yyyy" }}</p>
       </div>
       <div>
-        <p class="text-gray-500">Bill to</p>
-        <p class="font-bold">{{ invoice.clientName }}</p>
-        <p class="text-gray-500">{{ invoice.clientAddress.street }}</p>
-        <p class="text-gray-500">{{ invoice.clientAddress.city }}</p>
-        <p class="text-gray-500">{{ invoice.clientAddress.postCode }}</p>
-        <p class="text-gray-500">{{ invoice.clientAddress.country }}</p>
+        <p class="text-gray-700 pb-3.5" pb-3.5>Bill to</p>
+        <p class="font-bold pb-3.5">{{ invoice.clientName }}</p>
+        <p class="text-gray-700">
+          {{ invoice.clientAddress.street }}
+        </p>
+        <p class="text-gray-700">{{ invoice.clientAddress.city }}</p>
+        <p class="text-gray-700">{{ invoice.clientAddress.postCode }}</p>
+        <p class="text-gray-700">{{ invoice.clientAddress.country }}</p>
       </div>
       <div>
-        <p class="text-gray-500">Sent to</p>
+        <p class="text-gray-700 pb-3.5">Sent to</p>
         <p class="font-bold">{{ invoice.clientEmail }}</p>
       </div>
     </div>
     <!-- Table for Items -->
-    <div class="bg-gray-100 rounded-sm p-4 my-4">
-      <table
-        class="table-auto border-collapse border border-gray-500 w-full text-left"
-      >
+    <div class="rounded-md mt-8 overflow-hidden">
+      <table class="table-auto w-full text-left">
         <!-- Table Header -->
-        <thead>
-          <tr class="bg-gray-200">
-            <th class="border border-gray-400 px-4 py-2">Item Name</th>
-            <th class="border border-gray-400 px-4 py-2">QTY</th>
-            <th class="border border-gray-400 px-4 py-2">Price</th>
-            <th class="border border-gray-400 px-4 py-2">Total</th>
+        <thead class="bg-gray-light">
+          <tr class="text-gray">
+            <th class="px-4 py-2 font-normal">Item Name</th>
+            <th class="px-4 py-2 font-normal">QTY</th>
+            <th class="px-4 py-2 font-normal">Price</th>
+            <th class="px-4 py-2 font-normal">Total</th>
           </tr>
         </thead>
         <!-- Table Body -->
-        <tbody>
-          <tr *ngFor="let item of invoice.items">
-            <td class="border border-gray-400 px-4 py-2">{{ item.name }}</td>
-            <td class="border border-gray-400 px-4 py-2">
+        <tbody class="bg-gray-light">
+          <tr *ngFor="let item of invoice.items" class="bg-gray-light">
+            <td class="px-4 py-2 font-semibold">{{ item.name }}</td>
+            <td class="px-4 py-2 font-semibold text-gray">
               {{ item.quantity }}
             </td>
-            <td class="border border-gray-400 px-4 py-2">
+            <td class="px-4 py-2 font-semibold text-gray">
               {{ item.price | currency }}
             </td>
-            <td class="border border-gray-400 px-4 py-2">
+            <td class="px-4 py-2 font-semibold">
               {{ item.total | currency }}
             </td>
           </tr>
         </tbody>
+        <tfoot>
+          <tr class="bg-blue text-white">
+            <td colspan="2" class="px-4 py-4 font-medium">Amount Due</td>
+            <td colspan="2" class="px-4 py- font-bold text-right">
+              {{ invoice.total | currency }}
+            </td>
+          </tr>
+        </tfoot>
       </table>
     </div>
-    <p>Total: {{ invoice.total | currency }}</p>
   </div>
 </div>

@@ -7,6 +7,7 @@ module.exports = {
         purple: {
           light: "#9277FF",
           DEFAULT: "#7c5dfa",
+          100: "#DFE3FA",
         },
         red: {
           light: "#FF9797",
@@ -14,6 +15,8 @@ module.exports = {
         },
         gray: {
           DEFAULT: "#888EB0",
+          light: "#F9FAFE",
+          700: "#7E88C3",
         },
         green: {
           light: "#33D69F0F",
@@ -24,8 +27,8 @@ module.exports = {
           DEFAULT: "#FF8F00",
         },
         blue: {
-          light: "##373B530F",
-          DEFAULT: "##373B53",
+          light: "#373B530F",
+          DEFAULT: "#373B53",
         },
         black: {
           light: "#252945",
@@ -36,6 +39,12 @@ module.exports = {
       },
       spacing: {
         30: "6.438rem",
+        27: "108px",
+        128: "730px",
+        130: "760px",
+      },
+      boxShadow: {
+        "custom-light": "0px 10px 10px -10px rgba(72, 84, 159, 0.10)",
       },
     },
   },
