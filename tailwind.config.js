@@ -34,6 +34,9 @@ module.exports = {
         lightBg: "#F8F8FB",
         darkBg: "#141625",
       },
+      spacing: {
+        30: "6.438rem",
+      },
     },
   },
   plugins: [],
