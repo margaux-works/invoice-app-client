@@ -124,7 +124,7 @@
           <tr class="bg-blue text-white">
             <td colspan="2" class="px-4 py-4 font-medium">Amount Due</td>
             <td colspan="2" class="px-4 py- font-bold text-right">
-              {{ invoice.total | currency }}
+              {{ getTotal() | currency }}
             </td>
           </tr>
         </tfoot>

@@ -97,6 +97,36 @@ export class InvoiceEditComponent {
     return this.invoiceForm.get('items') as FormArray;
   }
 
+  addItem(): void {
+    const itemGroup = this.fb.group({
+      name: [''],
+      quantity: [0],
+      price: [0],
+      total: [{ value: 0, disabled: true }],
+    });
+
+    // Calculate total whenever quantity or price changes
+    itemGroup.get('quantity')?.valueChanges.subscribe(() => {
+      this.updateItemTotal(itemGroup);
+    });
+    itemGroup.get('price')?.valueChanges.subscribe(() => {
+      this.updateItemTotal(itemGroup);
+    });
+
+    this.items.push(itemGroup);
+  }
+
+  updateItemTotal(item: FormGroup): void {
+    const quantity = item.get('quantity')?.value || 0;
+    const price = item.get('price')?.value || 0;
+    const total = quantity * price;
+    item.get('total')?.setValue(total, { emitEvent: false });
+  }
+
+  removeItem(index: number): void {
+    this.items.removeAt(index);
+  }
+
   saveChanges(): void {
     if (this.invoiceForm.valid) {
       console.log('Form data to save:', this.invoiceForm.getRawValue());

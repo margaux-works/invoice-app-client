@@ -15,4 +15,11 @@ export class InvoiceViewComponent {
   @Output() delete = new EventEmitter<void>();
 
   constructor() {}
+
+  getTotal(): number {
+    return this.invoice.items.reduce(
+      (sum: number, item: { total: number }) => sum + item.total,
+      0
+    );
+  }
 }
