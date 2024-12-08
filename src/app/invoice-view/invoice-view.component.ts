@@ -18,7 +18,10 @@ export class InvoiceViewComponent {
 
   getTotal(): number {
     return this.invoice.items.reduce(
-      (sum: number, item: { total: number }) => sum + item.total,
+      (
+        sum: number,
+        item: { quantity: number; price: number; total?: number }
+      ) => sum + (item.total || item.quantity * item.price),
       0
     );
   }

@@ -116,7 +116,7 @@
               {{ item.price | currency }}
             </td>
             <td class="px-4 py-2 font-semibold">
-              {{ item.total | currency }}
+              {{ item.total || item.quantity * item.price | currency }}
             </td>
           </tr>
         </tbody>

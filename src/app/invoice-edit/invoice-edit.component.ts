@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { CommonModule } from '@angular/common';
+import { FetchApiDataService } from '../services/fetch-api-data.service';
 
 @Component({
   selector: 'app-invoice-edit',
@@ -24,7 +25,11 @@ export class InvoiceEditComponent {
 
   invoiceForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private datePipe: DatePipe) {}
+  constructor(
+    private fb: FormBuilder,
+    private datePipe: DatePipe,
+    private apiService: FetchApiDataService
+  ) {}
 
   ngOnInit(): void {
     const formattedDate = this.datePipe.transform(
@@ -128,12 +133,29 @@ export class InvoiceEditComponent {
   }
 
   saveChanges(): void {
-    if (this.invoiceForm.valid) {
-      console.log('Form data to save:', this.invoiceForm.getRawValue());
-      this.save.emit(this.invoiceForm.getRawValue());
-    } else {
-      console.error('Form is invalid:', this.invoiceForm);
-    }
+    const updatedItems = this.invoiceForm.value.items;
+
+    // Calculate new total
+    const updatedTotal = updatedItems.reduce(
+      (sum: number, item: { quantity: number; price: number }) =>
+        sum + item.quantity * item.price,
+      0
+    );
+
+    const updatedInvoice = {
+      ...this.invoiceForm.value,
+      total: updatedTotal, // Ensure total is included
+    };
+
+    // Update the invoice in the database
+    this.apiService.updateInvoice(this.invoice.id, updatedInvoice).subscribe({
+      next: () => {
+        this.save.emit(updatedInvoice); // Emit saved changes to parent
+      },
+      error: (err) => {
+        console.error('Error updating invoice:', err);
+      },
+    });
   }
 
   cancelEdit(): void {
