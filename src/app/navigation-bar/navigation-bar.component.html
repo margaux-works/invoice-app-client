@@ -1,13 +1,19 @@
 <nav
-  class="bg-black-light flex flex-col h-screen fixed top-0 left-0 w-30 lg:w-103 rounded-r-3xl"
+  class="bg-black-light flex flex-col h-screen fixed top-0 left-0 w-30 lg:w-103 rounded-r-3xl overflow-hidden"
 >
   <!-- Logo -->
-  <div class="flex items-center justify-center h-16 lg:h-24">
+  <div class="relative group">
+    <!-- Rectangle -->
     <img
-      src="path-to-your-logo.png"
-      alt="Logo"
-      class="h-10 w-10 lg:h-16 lg:w-16"
-      [routerLink]="['/dashboard']"
+      src="/icons/Rectangle Copy 3.svg"
+      alt="Logo Background"
+      class="w-full transition-transform duration-300 group-hover:translate-y-[-10px]"
+    />
+    <!-- Circle (Pacman-like shape) -->
+    <img
+      src="/icons/Combined Shape.svg"
+      alt="Logo Icon"
+      class="absolute top-2 left-1/2 transform -translate-x-1/2 w-8 h-8 lg:w-12 lg:h-12"
     />
   </div>
 

@@ -1,4 +1,4 @@
-<div class="invoice-view m-16">
+<div class="invoice-view mt-16 mb-2">
   <button [routerLink]="['/dashboard']" class="font-semibold">
     <img
       src="/icons/Path 2-left.svg"
@@ -45,8 +45,8 @@
         Delete
       </button>
       <button
+        *ngIf="invoice.status !== 'paid'"
         (click)="markAsPaid.emit()"
-        [disabled]="invoice.status === 'paid'"
         class="bg-purple hover:bg-purple-light text-white rounded-3xl py-2 px-4 mx-2 font-medium"
       >
         Mark as Paid

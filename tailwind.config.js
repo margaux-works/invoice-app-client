@@ -1,3 +1,5 @@
+const { transform } = require("typescript");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{html,ts}"],
@@ -45,6 +47,9 @@ module.exports = {
       },
       boxShadow: {
         "custom-light": "0px 10px 10px -10px rgba(72, 84, 159, 0.10)",
+      },
+      transitionProperty: {
+        transform: "transform",
       },
     },
   },

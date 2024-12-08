@@ -9,6 +9,7 @@
         <!-- Conditionally Show Create Invoice Form -->
         <app-invoice-create
           *ngIf="showCreateInvoice"
+          [showCreateInvoice]="showCreateInvoice"
           (save)="onInvoiceSaved()"
           (cancel)="onCancelInvoiceCreation()"
         ></app-invoice-create>
@@ -60,8 +61,8 @@
       </button>
     </div>
   </div>
-  <!-- List of Invoices -->
 
+  <!-- List of Invoices -->
   <div
     *ngIf="filteredInvoices.length > 0; else noInvoices"
     class="grid gap-4 mt-16"

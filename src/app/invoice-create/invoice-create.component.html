@@ -3,41 +3,45 @@
 >
   <!-- Modal Container -->
   <div
-    class="bg-white w-full md:w-1/2 h-full overflow-y-auto p-8 transform transition-transform ease-in-out duration-300 translate-x-0"
+    class="bg-white w-full md:w-1/2 h-full overflow-y-auto p-8 transform transition-transform ease-in-out duration-1000"
+    [ngClass]="{
+      'translate-x-0': showCreateInvoice,
+      '-translate-x-full': !showCreateInvoice
+    }"
   >
     <h2 class="text-2xl font-bold mb-6">New Invoice</h2>
     <form [formGroup]="invoiceForm" (ngSubmit)="submitInvoice()">
       <!-- Bill From -->
       <div class="mb-6">
-        <h3 class="text-lg font-semibold mb-2">Bill From</h3>
+        <h3 class="text-lg font-semibold mb-2 text-purple">Bill From</h3>
         <div formGroupName="senderAddress" class="space-y-4">
           <div>
-            <label class="block mb-1">Street Address</label>
+            <label class="text-gray block mb-1">Street Address</label>
             <input
               formControlName="street"
-              class="input-field block w-full border p-2 rounded"
+              class="input-field font-bold block w-full border p-2 rounded"
             />
           </div>
           <div class="grid grid-cols-3 gap-4">
             <div>
-              <label class="block mb-1">City</label>
+              <label class="text-gray block mb-1">City</label>
               <input
                 formControlName="city"
-                class="input-field block w-full border p-2 rounded"
+                class="input-field font-boldblock w-full border p-2 rounded"
               />
             </div>
             <div>
-              <label class="block mb-1">Post Code</label>
+              <label class="text-gray block mb-1">Post Code</label>
               <input
                 formControlName="postCode"
-                class="input-field block w-full border p-2 rounded"
+                class="input-field font-bold block w-full border p-2 rounded"
               />
             </div>
             <div>
-              <label class="block mb-1">Country</label>
+              <label class="text-gray block mb-1">Country</label>
               <input
                 formControlName="country"
-                class="input-field block w-full border p-2 rounded"
+                class="input-field font-bold block w-full border p-2 rounded"
               />
             </div>
           </div>
@@ -46,49 +50,49 @@
 
       <!-- Bill To -->
       <div class="mb-6">
-        <h3 class="text-lg font-semibold mb-2">Bill To</h3>
+        <h3 class="text-lg font-semibold mb-2 text-purple pt-8">Bill To</h3>
         <div class="space-y-4">
           <div>
-            <label class="block mb-1">Client Name</label>
+            <label class="text-gray block mb-1">Client's Name</label>
             <input
               formControlName="clientName"
-              class="input-field block w-full border p-2 rounded"
+              class="input-field font-bold block w-full border p-2 rounded"
             />
           </div>
           <div>
-            <label class="block mb-1">Client Email</label>
+            <label class="text-gray block mb-1">Client's Email</label>
             <input
               formControlName="clientEmail"
               type="email"
-              class="input-field block w-full border p-2 rounded"
+              class="input-field font-bold block w-full border p-2 rounded"
             />
           </div>
           <div formGroupName="clientAddress">
-            <label class="block mb-1">Street Address</label>
+            <label class="text-gray block text-graymb-1">Street Address</label>
             <input
               formControlName="street"
-              class="input-field block w-full border p-2 rounded"
+              class="input-field font-bold block w-full border p-2 rounded"
             />
             <div class="grid grid-cols-3 gap-4 mt-4">
               <div>
-                <label class="block mb-1">City</label>
+                <label class="block text-gray mb-1">City</label>
                 <input
                   formControlName="city"
-                  class="input-field block w-full border p-2 rounded"
+                  class="input-field font-bold block w-full border p-2 rounded"
                 />
               </div>
               <div>
-                <label class="block mb-1">Post Code</label>
+                <label class="block text-gray mb-1">Post Code</label>
                 <input
                   formControlName="postCode"
-                  class="input-field block w-full border p-2 rounded"
+                  class="input-field font-bold block w-full border p-2 rounded"
                 />
               </div>
               <div>
-                <label class="block mb-1">Country</label>
+                <label class="block text-gray mb-1">Country</label>
                 <input
                   formControlName="country"
-                  class="input-field block w-full border p-2 rounded"
+                  class="input-field font-bold block w-full border p-2 rounded"
                 />
               </div>
             </div>
@@ -99,7 +103,7 @@
       <!-- Invoice Details -->
       <div class="grid grid-cols-2 gap-4 mb-6">
         <div>
-          <label class="block mb-1">Invoice Date</label>
+          <label class="text-gray block mb-1">Invoice Date</label>
           <input
             formControlName="createdAt"
             class="input-field block w-full border p-2 rounded bg-gray-100"
@@ -107,33 +111,33 @@
           />
         </div>
         <div>
-          <label class="block mb-1">Payment Terms</label>
+          <label class="text-gray block mb-1">Payment Terms</label>
           <input
             formControlName="paymentTerms"
             type="number"
-            class="input-field block w-full border p-2 rounded"
+            class="input-field font-bold block w-full border p-2 rounded"
           />
         </div>
       </div>
       <div>
-        <label class="block mb-1">Project Description</label>
+        <label class="text-gray block mb-1">Project Description</label>
         <input
           formControlName="description"
-          class="input-field block w-full border p-2 rounded"
+          class="input-field font-bold block w-full border p-2 rounded"
         />
       </div>
 
       <!-- Item List -->
       <div class="mt-6">
-        <h3 class="text-lg font-semibold mb-2">Item List</h3>
-        <table class="table-auto w-full border-collapse border border-gray-400">
+        <h3 class="text-gray font-bold">Item List</h3>
+        <table class="table-auto w-full">
           <thead>
-            <tr class="bg-gray-200">
-              <th class="border border-gray-400 px-4 py-2">Item Name</th>
-              <th class="border border-gray-400 px-4 py-2">QTY</th>
-              <th class="border border-gray-400 px-4 py-2">Price</th>
-              <th class="border border-gray-400 px-4 py-2">Total</th>
-              <th class="border border-gray-400 px-4 py-2">Actions</th>
+            <tr>
+              <th class="py-2 font-normal text-gray text-left">Item Name</th>
+              <th class="py-2 font-normal text-gray">QTY</th>
+              <th class="py-2 font-normal text-gray">Price</th>
+              <th class="py-2 font-normal text-gray">Total</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -141,42 +145,46 @@
               *ngFor="let item of items.controls; let i = index"
               [formGroup]="item"
             >
-              <td>
+              <td class="px-4 py-2 w-[35%]">
                 <input
                   formControlName="name"
-                  class="input-field block w-full"
+                  class="input-field block w-full text-left"
+                  placeholder="Item Name"
                 />
               </td>
-              <td>
+              <td class="px-4 py-2 w-[15%]">
                 <input
                   formControlName="quantity"
                   type="number"
-                  class="input-field block w-full"
+                  class="input-field block w-full text-center"
+                  placeholder="Qty."
                   (input)="calculateTotal(i)"
                 />
               </td>
-              <td>
+              <td class="px-4 py-2 w-[15%]">
                 <input
                   formControlName="price"
                   type="number"
-                  class="input-field block w-full"
+                  class="input-field block w-full text-center"
                   (input)="calculateTotal(i)"
+                  placeholder="Price"
                 />
               </td>
-              <td>
+              <td class="px-4 py-2 w-[15%]">
                 <input
                   formControlName="total"
-                  class="input-field block w-full bg-gray-100"
+                  class="input-field block w-full text-center"
                   readonly
+                  placeholder="Total"
                 />
               </td>
-              <td>
-                <button
-                  type="button"
-                  (click)="removeItem(i)"
-                  class="text-red-500"
-                >
-                  🗑
+              <td class="pr-4 py-2 text-center w-[10%]">
+                <button type="button" (click)="removeItem(i)">
+                  <img
+                    src="/icons/bin.svg"
+                    alt="Remove"
+                    class="h-5 w-5 text-gray-500 hover:text-red-500"
+                  />
                 </button>
               </td>
             </tr>
@@ -185,34 +193,38 @@
         <button
           type="button"
           (click)="addItem()"
-          class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded mt-4"
+          class="bg-gray-light hover:bg-gray-100 text-gray font-bold px-4 py-2 rounded-3xl w-full mt-4"
         >
-          Add New Item
+          + Add New Item
         </button>
       </div>
 
       <!-- Actions -->
-      <div class="flex justify-between mt-8">
-        <button
-          type="button"
-          (click)="saveAsDraft()"
-          class="bg-gray-500 hover:bg-gray-700 text-white px-4 py-2 rounded"
-        >
-          Save as Draft
-        </button>
-        <button
-          type="submit"
-          class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
-        >
-          Save & Send
-        </button>
+
+      <div class="flex items-center justify-between mt-8">
         <button
           type="button"
           (click)="cancelCreation()"
-          class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded"
+          class="bg-gray-light hover:bg-gray-100 text-gray px-4 py-2 rounded-3xl"
         >
-          Cancel
+          Discard
         </button>
+
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            (click)="saveAsDraft()"
+            class="bg-blue text-gray px-4 py-2 rounded-3xl justify-end"
+          >
+            Save as Draft
+          </button>
+          <button
+            type="submit"
+            class="bg-purple hover:bg-purple-light text-white px-4 py-2 rounded-3xl justify-end"
+          >
+            Save & Send
+          </button>
+        </div>
       </div>
     </form>
   </div>

@@ -1,6 +1,4 @@
-<div
-  class="edit-panel mx-8 p-14 bg-white shadow-md rounded-lg animate-slideInLeft duration-500 ease-in-out"
->
+<div class="edit-panel p-14 bg-white shadow-md rounded-lg">
   <h2 class="text-xl font-bold mb-4 pb-8">Edit Invoice #{{ invoice.id }}</h2>
 
   <form [formGroup]="invoiceForm" (ngSubmit)="saveChanges()">
@@ -31,14 +29,14 @@
     <div class="mb-4">
       <h3 class="text-lg font-semibold mb-2 text-purple pt-8">Bill To</h3>
       <div>
-        <label class="text-gray">Client's Name</label>
+        <label class="text-gray mb-1">Client's Name</label>
         <input
           formControlName="clientName"
           class="input-field font-bold pb-10"
         />
       </div>
       <div class="mt-6">
-        <label class="text-gray">Client's Email</label>
+        <label class="text-gray mb-1">Client's Email</label>
         <input
           formControlName="clientEmail"
           type="email"
@@ -50,19 +48,19 @@
     <div class="mb-6">
       <div formGroupName="clientAddress">
         <div class="space-y-2">
-          <label class="text-gray">Street Address</label>
+          <label class="text-gray mb-1">Street Address</label>
           <input formControlName="street" class="input-field font-bold" />
           <div class="grid grid-cols-3 gap-4">
             <div>
-              <label class="text-gray">City</label>
+              <label class="text-gray mb-1">City</label>
               <input formControlName="city" class="input-field font-bold" />
             </div>
             <div>
-              <label class="text-gray">Post Code</label>
+              <label class="text-gray mb-1">Post Code</label>
               <input formControlName="postCode" class="input-field font-bold" />
             </div>
             <div>
-              <label class="text-gray">Country</label>
+              <label class="text-gray mb-1">Country</label>
               <input formControlName="country" class="input-field font-bold" />
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -21,6 +21,7 @@ import { DatePipe } from '@angular/common';
 export class InvoiceCreateComponent {
   @Output() save = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
+  @Input() showCreateInvoice!: boolean;
 
   invoiceForm: FormGroup;
 
