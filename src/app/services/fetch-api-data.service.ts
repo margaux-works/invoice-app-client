@@ -41,6 +41,17 @@ export class FetchApiDataService {
       .pipe(catchError(this.handleError));
   }
 
+  // login as a guest
+  public guestLogin(): Observable<any> {
+    const guestCredentials = {
+      username: 'guest',
+      password: 'guest',
+    };
+    return this.http
+      .post(apiUrl + 'login', guestCredentials)
+      .pipe(catchError(this.handleError));
+  }
+
   // Get list of invoices
   public getAllInvoices(): Observable<any> {
     return this.http
