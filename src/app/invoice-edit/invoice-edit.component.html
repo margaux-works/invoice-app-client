@@ -1,5 +1,7 @@
-<div class="edit-panel p-14 bg-white shadow-md rounded-lg">
-  <h2 class="text-xl font-bold mb-4 pb-8">Edit Invoice #{{ invoice.id }}</h2>
+<div class="edit-panel p-14 bg-white dark:bg-black-700 shadow-md rounded-lg">
+  <h2 class="text-xl font-bold mb-4 pb-8 dark:text-white">
+    Edit Invoice <span class="text-gray">#</span>{{ invoice.id }}
+  </h2>
 
   <form [formGroup]="invoiceForm" (ngSubmit)="saveChanges()">
     <div class="mb-4">
@@ -7,19 +9,31 @@
       <div formGroupName="senderAddress">
         <div class="space-y-2">
           <label class="text-gray">Street Address</label>
-          <input formControlName="street" class="input-field font-bold" />
+          <input
+            formControlName="street"
+            class="dark:bg-black dark:border-black-light dark:border-solid dark:text-white font-bold block w-full border p-2 rounded"
+          />
           <div class="grid grid-cols-3 gap-4 pt-6">
             <div>
-              <label class="text-gray">City</label>
-              <input formControlName="city" class="input-field font-bold" />
+              <label class="text-gray dark:text-purple-100">City</label>
+              <input
+                formControlName="city"
+                class="dark:bg-black dark:border-black-light dark:border-solid dark:text-white font-bold block w-full border p-2 rounded"
+              />
             </div>
             <div>
-              <label class="text-gray">Post Code</label>
-              <input formControlName="postCode" class="input-field font-bold" />
+              <label class="text-gray dark:text-purple-100">Post Code</label>
+              <input
+                formControlName="postCode"
+                class="dark:bg-black dark:border-black-light dark:border-solid dark:text-white font-bold block w-full border p-2 rounded"
+              />
             </div>
             <div>
-              <label class="text-gray">Country</label>
-              <input formControlName="country" class="input-field font-bold" />
+              <label class="text-gray dark:text-purple-100">Country</label>
+              <input
+                formControlName="country"
+                class="dark:bg-black dark:border-black-light dark:border-solid dark:text-white font-bold block w-full border p-2 rounded"
+              />
             </div>
           </div>
         </div>
@@ -29,18 +43,20 @@
     <div class="mb-4">
       <h3 class="text-lg font-semibold mb-2 text-purple pt-8">Bill To</h3>
       <div>
-        <label class="text-gray mb-1">Client's Name</label>
+        <label class="text-gray dark:text-purple-100 mb-1">Client's Name</label>
         <input
           formControlName="clientName"
-          class="input-field font-bold pb-10"
+          class="dark:bg-black dark:border-black-light dark:border-solid dark:text-white font-bold block w-full border p-2 rounded"
         />
       </div>
       <div class="mt-6">
-        <label class="text-gray mb-1">Client's Email</label>
+        <label class="text-gray dark:text-purple-100 mb-1"
+          >Client's Email</label
+        >
         <input
           formControlName="clientEmail"
           type="email"
-          class="input-field font-bold"
+          class="dark:bg-black dark:border-black-light dark:border-solid dark:text-white font-bold block w-full border p-2 rounded"
         />
       </div>
     </div>
@@ -48,20 +64,36 @@
     <div class="mb-6">
       <div formGroupName="clientAddress">
         <div class="space-y-2">
-          <label class="text-gray mb-1">Street Address</label>
-          <input formControlName="street" class="input-field font-bold" />
+          <label class="text-gray dark:text-purple-100 mb-1"
+            >Street Address</label
+          >
+          <input
+            formControlName="street"
+            class="dark:bg-black dark:border-black-light dark:border-solid dark:text-white font-bold block w-full border p-2 rounded"
+          />
           <div class="grid grid-cols-3 gap-4">
             <div>
-              <label class="text-gray mb-1">City</label>
-              <input formControlName="city" class="input-field font-bold" />
+              <label class="text-gray dark:text-purple-100 mb-1">City</label>
+              <input
+                formControlName="city"
+                class="dark:bg-black dark:border-black-light dark:border-solid dark:text-white font-bold block w-full border p-2 rounded"
+              />
             </div>
             <div>
-              <label class="text-gray mb-1">Post Code</label>
-              <input formControlName="postCode" class="input-field font-bold" />
+              <label class="text-gray dark:text-purple-100 mb-1"
+                >Post Code</label
+              >
+              <input
+                formControlName="postCode"
+                class="dark:bg-black dark:border-black-light dark:border-solid dark:text-white font-bold block w-full border p-2 rounded"
+              />
             </div>
             <div>
-              <label class="text-gray mb-1">Country</label>
-              <input formControlName="country" class="input-field font-bold" />
+              <label class="text-gray dark:text-purple-100 mb-1">Country</label>
+              <input
+                formControlName="country"
+                class="dark:bg-black dark:border-black-light dark:border-solid dark:text-white font-bold block w-full border p-2 rounded"
+              />
             </div>
           </div>
         </div>
@@ -74,7 +106,7 @@
         <input
           formControlName="createdAt"
           type="text"
-          class="input-field text-gray font-bold cursor-not-allowed bg-transparent"
+          class="text-gray dark:bg-black dark:border-black-light dark:border-solid dark:text-gray font-bold block w-full border p-2 rounded cursor-not-allowed bg-transparent"
           readonly
         />
       </div>
@@ -84,14 +116,17 @@
         <input
           formControlName="paymentTerms"
           type="number"
-          class="input-field font-bold"
+          class="dark:bg-black dark:border-black-light dark:border-solid dark:text-white font-bold block w-full border p-2 rounded"
         />
       </div>
     </div>
 
     <div class="mb-4">
       <label class="text-gray">Project Description</label>
-      <input formControlName="description" class="input-field font-bold" />
+      <input
+        formControlName="description"
+        class="dark:bg-black dark:border-black-light dark:border-solid dark:text-white font-bold block w-full border p-2 rounded"
+      />
     </div>
 
     <div class="mb-4">
@@ -99,10 +134,18 @@
       <table class="table-auto w-full">
         <thead>
           <tr>
-            <th class="py-2 font-normal text-gray">Item Name</th>
-            <th class="py-2 font-normal text-gray">QTY</th>
-            <th class="py-2 font-normal text-gray">Price</th>
-            <th class="py-2 font-normal text-gray">Total</th>
+            <th
+              class="py-2 font-normal text-gray dark:text-purple-100 text-left"
+            >
+              Item Name
+            </th>
+            <th class="py-2 font-normal text-gray dark:text-purple-100">QTY</th>
+            <th class="py-2 font-normal text-gray dark:text-purple-100">
+              Price
+            </th>
+            <th class="py-2 font-normal text-gray dark:text-purple-100">
+              Total
+            </th>
             <th></th>
             <!-- For the bin icon -->
           </tr>
@@ -112,26 +155,32 @@
             *ngFor="let item of items.controls; let i = index"
             [formGroup]="item"
           >
-            <td class="px-4 py-2 w-[35%]">
+            <td
+              class="px-4 w-[35%] dark:bg-black dark:border-black-light dark:border-solid dark:border dark:text-gray dark:rounded-lg mb-2"
+            >
               <input
                 formControlName="name"
-                class="input-field font-bold w-full"
+                class="font-bold w-full text-left dark:bg-transparent dark:text-white text-semibold"
                 placeholder="Item Name"
               />
             </td>
-            <td class="px-4 py-2 w-[15%]">
+            <td
+              class="px-4 w-[15%] dark:bg-black dark:border-black-light dark:border-solid dark:border dark:text-gray dark:rounded-lg mb-2"
+            >
               <input
                 formControlName="quantity"
                 type="number"
-                class="input-field font-bold text-center"
+                class="font-bold w-full text-left dark:bg-transparent dark:text-white text-semibold"
                 placeholder="Qty."
               />
             </td>
-            <td class="px-4 py-2 w-[15%]">
+            <td
+              class="px-4 w-[15%] dark:bg-black dark:border-black-light dark:border-solid dark:border dark:text-gray dark:rounded-lg mb-2"
+            >
               <input
                 formControlName="price"
                 type="number"
-                class="input-field font-bold text-center"
+                class="font-bold w-full text-left dark:bg-transparent dark:text-white text-semibold"
                 placeholder="Price"
               />
             </td>
@@ -139,7 +188,7 @@
               <input
                 formControlName="total"
                 type="number"
-                class="border-transparent bg-transparent text-center w-full"
+                class="input-field block w-full text-center bg-transparent dark:text-white text-semibold"
                 readonly
                 placeholder="Total"
               />
@@ -161,7 +210,7 @@
       <div class="mt-4 text-center">
         <button
           type="button"
-          class="bg-gray-light text-gray font-medium py-2 px-4 rounded-full hover:text-purple"
+          class="bg-gray-light dark:bg-black dark:text-purple-100 hover:bg-gray-100 text-gray font-semibold px-4 py-3 rounded-3xl w-full mt-4"
           (click)="addItem()"
         >
           + Add New Item
@@ -169,11 +218,20 @@
       </div>
     </div>
 
-    <div>
-      <button type="submit">Save</button>
-
-      <button type="button" class="btn btn-secondary" (click)="cancel.emit()">
+    <div class="flex justify-end">
+      <button
+        type="button"
+        class="bg-gray-light dark:bg-black dark:text-purple-100 hover:bg-gray-100 text-gray px-6 py-4 rounded-3xl font-semibold mr-4"
+        (click)="cancel.emit()"
+      >
         Cancel
+      </button>
+
+      <button
+        type="submit"
+        class="bg-purple hover:bg-purple-light dark:hover:bg-purple-light text-white px-4 py-1 rounded-3xl justify-end font-semibold"
+      >
+        Save Changes
       </button>
     </div>
   </form>
