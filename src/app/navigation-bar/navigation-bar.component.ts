@@ -1,17 +1,22 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ToastService } from '../services/toast.service';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-navigation-bar',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterModule],
   templateUrl: './navigation-bar.component.html',
   styleUrl: './navigation-bar.component.scss',
 })
 export class NavigationBarComponent {
-  constructor(private router: Router, private toastService: ToastService) {}
+  constructor(
+    private router: Router,
+    private toastService: ToastService,
+    public themeService: ThemeService
+  ) {}
   showLogOutBox = false;
 
   ngOnInit(): void {}
@@ -25,5 +30,10 @@ export class NavigationBarComponent {
 
   toggleLogoutBox() {
     this.showLogOutBox = !this.showLogOutBox;
+  }
+
+  toggleDarkMode(): void {
+    this.themeService.toggleTheme();
+    console.log('dark mode toggled');
   }
 }

@@ -1,8 +1,13 @@
 <div class="dashboard my-20 mx-72">
   <div class="head-container flex items-center justify-between w-128">
     <div class="flex flex-col">
-      <h1 class="text-3xl font-bold">Invoices</h1>
-      <p *ngIf="invoices.length > 0" class="mb-4 text-sm text-gray">
+      <h1 class="text-3xl font-bold text-black-800 dark:text-white">
+        Invoices
+      </h1>
+      <p
+        *ngIf="invoices.length > 0"
+        class="mb-4 text-sm text-gray dark:text-white"
+      >
         There are {{ invoices.length }} total invoices
       </p>
       <div *ngIf="invoices.length > 0; else noInvoices">
@@ -20,7 +25,10 @@
     <div class="flex items-center space-x-10">
       <!-- Filter Dropdown -->
       <div class="relative inline-block">
-        <button (click)="toggleFilterDropdown()" class="font-bold py-2 px-4">
+        <button
+          (click)="toggleFilterDropdown()"
+          class="font-bold py-2 px-4 text-black-800 dark:text-white"
+        >
           Filter by Status
           <img
             src="/icons/Path 2.svg"
@@ -30,11 +38,11 @@
         </button>
         <div
           *ngIf="showFilterDropdown"
-          class="absolute bg-white shadow-md rounded mt-2 p-4"
+          class="absolute bg-white dark:bg-black-light shadow-md rounded mt-2 p-4 w-[160px] items-center"
         >
           <label
             *ngFor="let status of ['draft', 'pending', 'paid']"
-            class="block mb-2 items-center space-x-4"
+            class="block mb-2 items-center space-x-4 dark:text-white"
           >
             <input
               type="checkbox"
@@ -69,20 +77,26 @@
   >
     <div
       *ngFor="let invoice of filteredInvoices"
-      class="invoice-card flex items-center bg-white shadow-sm py-5 rounded-lg w-128 hover:border-purple border border-transparent"
+      class="invoice-card flex items-center bg-white dark:bg-black shadow-sm py-5 rounded-lg w-128 hover:border-purple border border-transparent"
     >
       <h2
-        class="text-base font-bold pl-8 pr-12 whitespace-nowrap overflow-hidden"
+        class="text-base dark:text-white font-bold pl-8 pr-12 whitespace-nowrap overflow-hidden"
       >
         <span class="text-gray font-bold">#</span>{{ invoice.id }}
       </h2>
-      <p class="text-sm text-gray pr-16 whitespace-nowrap overflow-hidden">
+      <p
+        class="text-sm text-gray dark:text-white pr-16 whitespace-nowrap overflow-hidden"
+      >
         Due {{ invoice.paymentDue | date : "dd MMM yyyy" }}
       </p>
-      <p class="text-sm text-gray pr-27 whitespace-nowrap overflow-hidden">
+      <p
+        class="text-sm text-gray dark:text-white pr-27 whitespace-nowrap overflow-hidden"
+      >
         {{ invoice.clientName }}
       </p>
-      <p class="text-base font-bold pr-16 whitespace-nowrap overflow-hidden">
+      <p
+        class="text-base dark:text-white font-bold pr-16 whitespace-nowrap overflow-hidden"
+      >
         {{ invoice.total | currency }}
       </p>
       <!-- Dynamic Status -->
@@ -91,7 +105,8 @@
         [ngClass]="{
           'bg-green-light text-green': invoice.status === 'paid',
           'bg-orange-light text-orange': invoice.status === 'pending',
-          'bg-gray-100 text-blue': invoice.status === 'draft'
+          'bg-gray-100 dark:bg-black-100 dark:text-white text-blue':
+            invoice.status === 'draft'
         }"
       >
         <span

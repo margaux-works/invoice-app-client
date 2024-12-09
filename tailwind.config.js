@@ -3,6 +3,7 @@ const { transform } = require("typescript");
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{html,ts}"],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
@@ -35,9 +36,14 @@ module.exports = {
         black: {
           light: "#252945",
           DEFAULT: "#1E2139",
+          700: "#141625",
+          800: "#0C0E16",
+          100: "#DFE3FA0F",
         },
-        lightBg: "#F8F8FB",
-        darkBg: "#141625",
+        white: {
+          light: "#f8f8fb",
+          DEFAULT: "#ffffff",
+        },
       },
       spacing: {
         30: "6.438rem",

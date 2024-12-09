@@ -2,7 +2,7 @@
   class="bg-black-light flex flex-col h-screen fixed top-0 left-0 w-30 lg:w-103 rounded-r-3xl overflow-hidden"
 >
   <!-- Logo -->
-  <div class="relative group">
+  <div class="relative group cursor-pointer" [routerLink]="['/dashboard']">
     <!-- Rectangle -->
     <img
       src="/icons/Rectangle Copy 3.svg"
@@ -20,15 +20,20 @@
   <!-- Dark/Light Mode and Logout -->
   <div class="flex flex-col items-center lg:items-start space-y-4 p-4 mt-auto">
     <!-- Dark/Light Mode -->
-    <button class="p-2 bg-gray-700 rounded-full hover:bg-gray-600">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6 text-white"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-      >
-        <path d="M10 2a8 8 0 100 16 8 8 0 000-16z" />
-      </svg>
+
+    <button class="p-2" (click)="toggleDarkMode()">
+      <img
+        *ngIf="!themeService.isDarkMode()"
+        src="/icons/moon.svg"
+        alt="Dark Mode"
+        class="h-6 w-6"
+      />
+      <img
+        *ngIf="themeService.isDarkMode()"
+        src="/icons/sun.svg"
+        alt="Light Mode"
+        class="h-6 w-6"
+      />
     </button>
 
     <!-- Logout -->

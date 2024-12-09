@@ -1,13 +1,13 @@
 <div class="invoice-view mt-16 mb-2">
-  <button [routerLink]="['/dashboard']" class="font-semibold">
+  <button [routerLink]="['/dashboard']" class="font-semibold dark:text-gray">
     <img
       src="/icons/Path 2-left.svg"
       alt="Back Icon"
-      class="inline-flex p-2"
+      class="inline-flex pr-4"
     />Go back
   </button>
   <div
-    class="head-container flex-row flex items-center justify-between bg-white p-4 mt-8 mb-6 w-128 rounded-md shadow-custom-light"
+    class="head-container flex-row flex items-center justify-between bg-white dark:bg-black p-4 mt-8 mb-6 w-128 rounded-md shadow-custom-light"
   >
     <p class="text-gray-500 justify-center align-middle pl-2 pr-4 text-sm">
       Status
@@ -15,7 +15,8 @@
     <div
       class="flex items-center justify-center gap-2 px-4 py-2 rounded-md text-sm font-bold w-[104px] h-[40px]whitespace-nowrap"
       [ngClass]="{
-        'bg-green-100 text-green': invoice.status === 'paid',
+        'bg-green-100 dark:bg-green-light text-green':
+          invoice.status === 'paid',
         'bg-orange-100 text-orange': invoice.status === 'pending',
         'bg-gray-100 text-gray': invoice.status === 'draft'
       }"
@@ -23,9 +24,9 @@
       <span
         class="w-2 h-2 rounded-full text-base"
         [ngClass]="{
-          'bg-green-600': invoice.status === 'paid',
-          'bg-orange-600': invoice.status === 'pending',
-          'bg-gray-600': invoice.status === 'draft'
+          'bg-green': invoice.status === 'paid',
+          'bg-orange': invoice.status === 'pending',
+          'bg-blue': invoice.status === 'draft'
         }"
       ></span>
       {{ invoice.status | titlecase }}
@@ -34,13 +35,13 @@
     <div class="flex items-center ml-auto gap-2 pr-4">
       <button
         (click)="edit.emit()"
-        class="bg-slate-100 hover:bg-slate-200 text-slate-400 font-medium py-2 px-4 mx-2 rounded-3xl"
+        class="bg-slate-100 dark:bg-black-light dark:hover:bg-white dark:hover:text-gray-700 dark:text-purple-100 hover:bg-slate-200 text-slate-400 font-medium py-3 px-6 mx-2 rounded-3xl"
       >
         Edit
       </button>
       <button
         (click)="delete.emit()"
-        class="bg-red hover:bg-red-light text-white font-medium py-2 px-4 mx-2 rounded-3xl"
+        class="bg-red hover:bg-red-light text-white font-medium py-3 px-5 mx-2 rounded-3xl"
       >
         Delete
       </button>
@@ -55,75 +56,102 @@
   </div>
 
   <div
-    class="bg-white rounded-md invoice-container shadow-custom-light w-128 p-12"
+    class="bg-white rounded-md invoice-container shadow-custom-light w-128 p-12 dark:bg-black"
   >
     <div class="grid grid-cols-2">
       <div>
-        <h1 class="font-bold">
+        <h1 class="font-bold dark:text-white">
           <span class="text-gray-700">#</span>{{ invoice.id }}
         </h1>
-        <p>{{ invoice.description }}</p>
+        <p class="dark:text-purple-100">{{ invoice.description }}</p>
       </div>
       <div class="col-end-8">
-        <p class="text-gray-700">{{ invoice.senderAddress.street }}</p>
-        <p class="text-gray-700">{{ invoice.senderAddress.city }}</p>
-        <p class="text-gray-700">{{ invoice.senderAddress.postCode }}</p>
-        <p class="text-gray-700">{{ invoice.senderAddress.country }}</p>
+        <p class="text-gray-700 dark:text-purple-100">
+          {{ invoice.senderAddress.street }}
+        </p>
+        <p class="text-gray-700 dark:text-purple-100">
+          {{ invoice.senderAddress.city }}
+        </p>
+        <p class="text-gray-700 dark:text-purple-100">
+          {{ invoice.senderAddress.postCode }}
+        </p>
+        <p class="text-gray-700 dark:text-purple-100">
+          {{ invoice.senderAddress.country }}
+        </p>
       </div>
     </div>
     <div class="grid grid-cols-3 mt-8">
       <div>
-        <p class="text-gray-700 pb-3.5">Invoice Date</p>
-        <p class="font-bold">{{ invoice.createdAt | date : "dd MMM yyyy" }}</p>
-        <p class="text-gray-700 mt-8 pb-3.5">Payment Due</p>
-        <p class="font-bold">{{ invoice.paymentDue | date : "dd MMM yyyy" }}</p>
+        <p class="text-gray-700 pb-3.5 dark:text-purple-100">Invoice Date</p>
+        <p class="font-bold dark:text-white">
+          {{ invoice.createdAt | date : "dd MMM yyyy" }}
+        </p>
+        <p class="text-gray-700 mt-8 pb-3.5 dark:text-purple-100">
+          Payment Due
+        </p>
+        <p class="font-bold dark:text-white">
+          {{ invoice.paymentDue | date : "dd MMM yyyy" }}
+        </p>
       </div>
       <div>
-        <p class="text-gray-700 pb-3.5" pb-3.5>Bill to</p>
-        <p class="font-bold pb-3.5">{{ invoice.clientName }}</p>
-        <p class="text-gray-700">
+        <p class="text-gray-700 pb-3.5 dark:text-purple-100" pb-3.5>Bill to</p>
+        <p class="font-bold pb-3.5 dark:text-white">{{ invoice.clientName }}</p>
+        <p class="text-gray-700 dark:text-purple-100">
           {{ invoice.clientAddress.street }}
         </p>
-        <p class="text-gray-700">{{ invoice.clientAddress.city }}</p>
-        <p class="text-gray-700">{{ invoice.clientAddress.postCode }}</p>
-        <p class="text-gray-700">{{ invoice.clientAddress.country }}</p>
+        <p class="text-gray-700 dark:text-purple-100">
+          {{ invoice.clientAddress.city }}
+        </p>
+        <p class="text-gray-700 dark:text-purple-100">
+          {{ invoice.clientAddress.postCode }}
+        </p>
+        <p class="text-gray-700 dark:text-purple-100">
+          {{ invoice.clientAddress.country }}
+        </p>
       </div>
       <div>
-        <p class="text-gray-700 pb-3.5">Sent to</p>
-        <p class="font-bold">{{ invoice.clientEmail }}</p>
+        <p class="text-gray-700 pb-3.5 dark:text-purple-100">Sent to</p>
+        <p class="font-bold dark:text-white">{{ invoice.clientEmail }}</p>
       </div>
     </div>
     <!-- Table for Items -->
     <div class="rounded-md mt-8 overflow-hidden">
       <table class="table-auto w-full text-left">
         <!-- Table Header -->
-        <thead class="bg-gray-light">
+        <thead class="bg-gray-light dark:bg-black-light">
           <tr class="text-gray">
-            <th class="px-4 py-2 font-normal">Item Name</th>
-            <th class="px-4 py-2 font-normal">QTY</th>
-            <th class="px-4 py-2 font-normal">Price</th>
-            <th class="px-4 py-2 font-normal">Total</th>
+            <th class="px-4 py-2 font-normal dark:text-purple-100">
+              Item Name
+            </th>
+            <th class="px-4 py-2 font-normal dark:text-purple-100">QTY</th>
+            <th class="px-4 py-2 font-normal dark:text-purple-100">Price</th>
+            <th class="px-4 py-2 font-normal dark:text-purple-100">Total</th>
           </tr>
         </thead>
         <!-- Table Body -->
-        <tbody class="bg-gray-light">
-          <tr *ngFor="let item of invoice.items" class="bg-gray-light">
-            <td class="px-4 py-2 font-semibold">{{ item.name }}</td>
-            <td class="px-4 py-2 font-semibold text-gray">
+        <tbody>
+          <tr
+            *ngFor="let item of invoice.items"
+            class="bg-gray-light dark:bg-black-light"
+          >
+            <td class="px-4 py-2 font-semibold dark:text-white">
+              {{ item.name }}
+            </td>
+            <td class="px-4 py-2 font-semibold text-gray dark:text-purple-100">
               {{ item.quantity }}
             </td>
-            <td class="px-4 py-2 font-semibold text-gray">
+            <td class="px-4 py-2 font-semibold text-gray dark:text-purple-100">
               {{ item.price | currency }}
             </td>
-            <td class="px-4 py-2 font-semibold">
+            <td class="px-4 py-2 font-semibold dark:text-white">
               {{ item.total || item.quantity * item.price | currency }}
             </td>
           </tr>
         </tbody>
         <tfoot>
-          <tr class="bg-blue text-white">
+          <tr class="bg-blue text-white dark:bg-black-800">
             <td colspan="2" class="px-4 py-4 font-medium">Amount Due</td>
-            <td colspan="2" class="px-4 py- font-bold text-right">
+            <td colspan="2" class="pr-20 font-bold text-right">
               {{ getTotal() | currency }}
             </td>
           </tr>
