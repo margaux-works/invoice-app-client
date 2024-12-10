@@ -1,9 +1,11 @@
 <div class="h-screen flex flex-col items-center justify-center">
   <div
-    class="bg-white w-[480px] h-[260px] shadow-lg rounded-lg flex flex-col items-center justify-center"
+    class="bg-white dark:bg-black w-[480px] h-[260px] shadow-lg rounded-lg flex flex-col items-center justify-center"
   >
-    <h1 class="text-4xl font-bold text-gray-800 mb-2">Invoice App</h1>
-    <p class="p-6 text-center">
+    <h1 class="text-4xl font-bold text-gray-800 dark:text-white mb-2">
+      Invoice App
+    </h1>
+    <p class="p-6 text-center dark:text-purple-100">
       This is a portfolio project developed from a
       <a
         href="https://www.frontendmentor.io/challenges/invoice-app-i7KaLTQjl"
@@ -25,13 +27,13 @@
 
       <!-- Login Button -->
       <button
-        class="bg-blue hover:bg-black text-white px-6 py-2 rounded-3xl shadow-md focus:outline-none"
+        class="bg-blue dark:bg-black-light dark:hover:bg-black hover:bg-black text-white px-6 py-2 rounded-3xl shadow-md focus:outline-none"
         (click)="openLoginModal()"
       >
         Login
       </button>
     </div>
-    <p>
+    <p class="dark:text-purple-100">
       or
       <span
         class="text-purple font-semibold hover:underline cursor-pointer"
@@ -41,7 +43,7 @@
       >
     </p>
   </div>
-  <p class="mt-6 text-center opacity-50">
+  <p class="mt-6 text-center opacity-50 dark:text-gray">
     Developed by
     <a
       href="https://github.com/margaux-works"
@@ -71,8 +73,10 @@
   *ngIf="isRegistrationModalOpen"
   class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center"
 >
-  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md" role="dialog">
-    <h2 class="text-xl font-bold text-gray-800 mb-4">Sign Up</h2>
+  <div
+    class="bg-white dark:bg-black-light p-6 rounded-lg shadow-lg w-full max-w-md"
+    role="dialog"
+  >
     <app-user-registration-form></app-user-registration-form>
     <button
       class="mt-4 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700"

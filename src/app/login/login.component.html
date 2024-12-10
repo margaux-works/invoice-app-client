@@ -1,8 +1,10 @@
 <div class="flex items-center justify-center">
   <div
-    class="max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg space-y-6 w-[680px] h-[460px]"
+    class="max-w-md mx-auto p-6 bg-white dark:bg-black-light rounded-xl shadow-lg space-y-6 w-[680px] h-[460px]"
   >
-    <h2 class="text-3xl font-bold text-center text-gray-800">Login</h2>
+    <h2 class="text-3xl font-bold text-center text-gray-800 dark:text-white">
+      Login
+    </h2>
 
     <form (ngSubmit)="loginUser()">
       <!-- Username Input -->
@@ -17,7 +19,7 @@
           name="Username"
           placeholder="Enter your username"
           required
-          class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          class="w-full p-3 border border-gray-300 dark:bg-black dark:text-purple-100 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
       </div>
 
@@ -33,7 +35,7 @@
           name="Password"
           placeholder="Enter your password"
           required
-          class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          class="w-full p-3 border border-gray-300 dark:bg-black dark:text-purple-100 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
       </div>
 

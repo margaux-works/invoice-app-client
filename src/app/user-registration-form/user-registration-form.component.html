@@ -1,5 +1,9 @@
-<div class="max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg space-y-6">
-  <h2 class="text-3xl font-bold text-center text-gray-800">Register</h2>
+<div
+  class="max-w-md mx-auto p-6 bg-white dark:bg-black-light rounded-xl shadow-lg space-y-6"
+>
+  <h2 class="text-3xl font-bold text-center text-gray-800 dark:text-white">
+    Register
+  </h2>
 
   <form (ngSubmit)="registerUser()">
     <!-- Username Input -->
@@ -14,7 +18,7 @@
         name="Username"
         placeholder="Enter your username"
         required
-        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        class="w-full p-3 border border-gray-300 rounded-md dark:bg-black dark:text-purple-100"
       />
     </div>
 
@@ -30,7 +34,7 @@
         name="Email"
         placeholder="Enter your email"
         required
-        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        class="w-full p-3 border border-gray-300 rounded-md dark:bg-black dark:text-purple-100"
       />
     </div>
 
@@ -46,7 +50,7 @@
         name="Password"
         placeholder="Enter your password"
         required
-        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        class="w-full p-3 border border-gray-300 rounded-md dark:bg-black dark:text-purple-100"
       />
     </div>
 
@@ -54,7 +58,7 @@
     <div class="flex justify-center">
       <button
         type="submit"
-        class="w-full bg-indigo-600 text-white py-3 rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500"
+        class="w-full bg-purple text-white py-3 rounded-md shadow-md hover:bg-purple-light"
       >
         Register
       </button>

@@ -126,7 +126,7 @@
           <label class="text-gray block mb-1">Invoice Date</label>
           <input
             formControlName="createdAt"
-            class="input-field dark:bg-black dark:border-black-light border-solid dark:text-gray block w-full border p-2 rounded bg-gray-100"
+            class="input-field dark:bg-black dark:border-black-light border-solid text-gray block w-full border p-2 rounded bg-gray-100"
             readonly
           />
         </div>
@@ -179,41 +179,34 @@
               *ngFor="let item of items.controls; let i = index"
               [formGroup]="item"
             >
-              <td
-                class="px-4 py-2 w-[35%] dark:bg-black dark:border-black-light dark:border-solid dark:border dark:text-gray dark:rounded"
-              >
+              <td class="w-[35%] mb-3">
                 <input
                   formControlName="name"
-                  class="input-field block w-full text-left dark:bg-transparent dark:text-white text-semibold"
+                  class="font-bold w-full text-left dark:text-white text-semibold dark:bg-black dark:border-black-light border-solid border border-purple-100 p-4 mr-2 mb-2 rounded-lg"
                   placeholder="Item Name"
                 />
               </td>
-              <td
-                class="px-4 py-2 w-[15%] dark:bg-black dark:border-black-light dark:border-solid dark:border dark:text-gray dark:rounded"
-              >
+              <td class="w-[15%] px-2">
                 <input
                   formControlName="quantity"
                   type="number"
-                  class="input-field block w-full text-center dark:bg-transparent dark:text-white text-semibold"
+                  class="font-bold w-full text-center dark:text-white text-semibold dark:bg-black dark:border-black-light border-solid border border-purple-100 py-4 mb-2 rounded-lg"
                   placeholder="Qty."
-                  (input)="calculateTotal(i)"
                 />
               </td>
-              <td
-                class="px-4 py-2 w-[15% dark:bg-black dark:border-black-light dark:border-solid dark:border dark:text-gray dark:rounded"
-              >
+              <td class="w-[15%">
                 <input
                   formControlName="price"
                   type="number"
-                  class="input-field block w-full text-cente dark:bg-transparent dark:text-white text-semibold"
+                  class="font-bold w-full text-center dark:text-white text-semibold dark:bg-black dark:border-black-light border-solid border border-purple-100 py-4 mb-2 rounded-lg"
                   (input)="calculateTotal(i)"
                   placeholder="Price"
                 />
               </td>
-              <td class="px-4 py-2 w-[15%]">
+              <td class="font-bold py-2 w-[15%]">
                 <input
                   formControlName="total"
-                  class="input-field block w-full text-center dark:bg-transparent dark:text-white text-semibold"
+                  class="nput-field block w-full text-center bg-transparent text-gray dark:text-white text-semibold"
                   readonly
                   placeholder="Total"
                 />
