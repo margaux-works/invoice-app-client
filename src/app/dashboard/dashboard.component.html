@@ -1,5 +1,5 @@
-<div class="dashboard my-20 mx-72">
-  <div class="head-container flex items-center justify-between w-128">
+<div class="dashboard lg:my-20 lg:mx-72 md:mx-12 md:my-36 my-28 mx-10">
+  <div class="head-container flex items-center lg:justify-between w-128">
     <div class="flex flex-col">
       <h1 class="text-3xl font-bold text-black-800 dark:text-white">
         Invoices
@@ -24,12 +24,15 @@
     <!-- Right Section: Filter + New Invoice -->
     <div class="flex items-center space-x-10">
       <!-- Filter Dropdown -->
-      <div class="relative inline-block">
+      <div class="relative inline-block pl-10">
         <button
           (click)="toggleFilterDropdown()"
           class="font-bold py-2 px-4 text-black-800 dark:text-white"
         >
-          Filter by Status
+          <!-- Text for larger screens -->
+          <span class="hidden sm:inline">Filter by Status</span>
+          <!-- Text for mobile screens -->
+          <span class="inline sm:hidden">Filter</span>
           <img
             src="/icons/Path 2.svg"
             alt="New Invoice Icon"
@@ -58,14 +61,17 @@
       <!-- New Invoice Dropdown -->
       <button
         (click)="openCreateInvoiceForm()"
-        class="bg-purple hover:bg-purple-light text-white font-bold rounded-3xl h-12 flex items-center justify-between pl-1 pr-4 w-44"
+        class="bg-purple hover:bg-purple-light text-white font-bold rounded-3xl h-12 flex items-center justify-between pl-1 pr-4 lg:w-44"
       >
         <img
           src="/icons/Group 3.svg"
           alt="New Invoice Icon"
-          class="h-10 w-10 p-1"
+          class="h-10 w-10 p-1 pr-2"
         />
-        <span class="ml-2 pr-4">New Invoice</span>
+        <!-- Text for larger screens -->
+        <span class="hidden sm:inline lg:ml-2 pr-4">New Invoice</span>
+        <!-- Text for mobile screens -->
+        <span class="inline sm:hidden lg:ml-2 pr-4">New</span>
       </button>
     </div>
   </div>
@@ -77,31 +83,40 @@
   >
     <div
       *ngFor="let invoice of filteredInvoices"
-      class="invoice-card flex items-center bg-white dark:bg-black shadow-sm py-5 rounded-lg w-128 hover:border-purple border border-transparent"
+      [routerLink]="['/invoice', invoice.id]"
+      class="invoice-card bg-white dark:bg-black shadow-sm py-5 rounded-lg hover:border-purple border border-transparent cursor-pointer grid grid-cols-2 gap-y-4 items-center sm:flex sm:items-center sm:w-128 sm:gap-0"
     >
+      <!-- Invoice ID -->
       <h2
-        class="text-base dark:text-white font-bold pl-8 pr-12 whitespace-nowrap overflow-hidden"
+        class="text-base dark:text-white font-bold pl-4 col-span-2 sm:pl-8 sm:pr-12 sm:col-span-1"
       >
         <span class="text-gray font-bold">#</span>{{ invoice.id }}
       </h2>
+
+      <!-- Due Date -->
       <p
-        class="text-sm text-gray dark:text-white pr-16 whitespace-nowrap overflow-hidden"
+        class="text-sm text-gray dark:text-white pl-4 sm:pr-16 col-span-1 sm:col-auto"
       >
         Due {{ invoice.paymentDue | date : "dd MMM yyyy" }}
       </p>
+
+      <!-- Total -->
       <p
-        class="text-sm text-gray dark:text-white pr-27 whitespace-nowrap overflow-hidden"
-      >
-        {{ invoice.clientName }}
-      </p>
-      <p
-        class="text-base dark:text-white font-bold pr-16 whitespace-nowrap overflow-hidden"
+        class="text-base dark:text-white font-bold pl-4 col-span-1 row-start-3 sm:pr-16 sm:col-auto"
       >
         {{ invoice.total | currency }}
       </p>
-      <!-- Dynamic Status -->
+
+      <!-- Client Name -->
+      <p
+        class="text-sm text-gray dark:text-white text-right pr-4 sm:pr-16 col-span-1 sm:col-auto sm:text-left"
+      >
+        {{ invoice.clientName }}
+      </p>
+
+      <!-- Status -->
       <div
-        class="flex items-center justify-center gap-2 px-4 py-2 rounded-md text-sm font-semibold w-[104px] h-[40px]whitespace-nowrap"
+        class="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold justify-end col-start-2 row-start-3 sm:col-auto sm:w-[104px] sm:h-[40px] w-[80px] justify-self-end mr-4"
         [ngClass]="{
           'bg-green-light text-green': invoice.status === 'paid',
           'bg-orange-light text-orange': invoice.status === 'pending',
@@ -110,7 +125,7 @@
         }"
       >
         <span
-          class="w-2 h-2 rounded-full text-base"
+          class="w-2 h-2 rounded-full"
           [ngClass]="{
             'bg-green': invoice.status === 'paid',
             'bg-orange': invoice.status === 'pending',
@@ -119,10 +134,15 @@
         ></span>
         {{ invoice.status | titlecase }}
       </div>
-      <button [routerLink]="['/invoice', invoice.id]" class="pl-5 pr-8">
+
+      <!-- See More Button -->
+      <button
+        [routerLink]="['/invoice', invoice.id]"
+        class="hidden sm:inline-block pl-5 pr-8"
+      >
         <img
           src="/icons/Desktop - Invoices - Hover/Path 5 Copy.svg"
-          alt="New Invoice Icon"
+          alt="See More"
           class="h-3 w-3"
         />
       </button>
