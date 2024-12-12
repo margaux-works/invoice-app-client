@@ -1,14 +1,21 @@
 <div class="dashboard lg:my-20 lg:mx-72 md:mx-12 md:my-36 my-28 mx-10">
   <div class="head-container flex items-center lg:justify-between w-128">
     <div class="flex flex-col">
-      <h1 class="text-3xl font-bold text-black-800 dark:text-white">
+      <h1
+        class="lg:text-3xl md:text-3xl text-2xl font-bold text-black-800 dark:text-white"
+      >
         Invoices
       </h1>
       <p
         *ngIf="invoices.length > 0"
         class="mb-4 text-sm text-gray dark:text-white"
       >
-        There are {{ invoices.length }} total invoices
+        <!-- Text for larger screens -->
+        <span class="hidden sm:inline"
+          >There are {{ invoices.length }} total invoices</span
+        >
+        <!-- Text for mobile screens -->
+        <span class="inline sm:hidden">{{ invoices.length }} invoices</span>
       </p>
       <div *ngIf="invoices.length > 0; else noInvoices">
         <!-- Conditionally Show Create Invoice Form -->
@@ -22,7 +29,7 @@
     </div>
 
     <!-- Right Section: Filter + New Invoice -->
-    <div class="flex items-center space-x-10">
+    <div class="flex items-center lg:space-x-10 md:space-x-10">
       <!-- Filter Dropdown -->
       <div class="relative inline-block pl-10">
         <button
@@ -61,7 +68,7 @@
       <!-- New Invoice Dropdown -->
       <button
         (click)="openCreateInvoiceForm()"
-        class="bg-purple hover:bg-purple-light text-white font-bold rounded-3xl h-12 flex items-center justify-between pl-1 pr-4 lg:w-44"
+        class="bg-purple hover:bg-purple-light text-white font-bold rounded-3xl h-12 flex items-center justify-between pl-1 pr-4 lg:w-44 ml-2"
       >
         <img
           src="/icons/Group 3.svg"
