@@ -21,7 +21,7 @@
             >
             <input
               formControlName="street"
-              class="input-field dark:bg-black dark:border-black-light border-solid dark:text-white font-bold block w-full border p-2 rounded"
+              class="input-field dark:bg-black dark:border-black-light border-solid dark:text-white font-bold block w-full border p-2 rounded focus:border-purple"
               [ngClass]="{
                 'border-red-500':
                   invoiceForm.get('senderAddress.street')?.touched &&
@@ -48,7 +48,7 @@
               >
               <input
                 formControlName="city"
-                class="input-field dark:bg-black dark:border-black-light border-solid dark:text-white font-boldblock w-full border p-2 rounded"
+                class="dark:bg-black dark:border-black-light border-solid dark:text-white font-boldblock w-full border p-2 rounded !important"
                 [ngClass]="{
                   'border-red-500':
                     invoiceForm.get('senderAddress.city')?.touched &&
@@ -404,7 +404,7 @@
               <td class="pr-4 py-2 text-center w-[10%]">
                 <button type="button" (click)="removeItem(i)">
                   <img
-                    src="/icons/bin.svg"
+                    src="./icons/bin.svg"
                     alt="Remove"
                     class="h-5 w-5 text-gray-500 hover:text-red-500"
                   />

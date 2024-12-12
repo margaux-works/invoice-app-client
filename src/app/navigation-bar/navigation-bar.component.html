@@ -8,13 +8,13 @@
   >
     <!-- Rectangle -->
     <img
-      src="/icons/Rectangle Copy 3.svg"
+      src="./icons/Rectangle Copy 3.svg"
       alt="Logo Background"
       class="transition-transform duration-300 group-hover:translate-y-[-10px] w-[72px] md:w-[80px] lg:w-full"
     />
     <!-- Circle (Pacman-like shape) -->
     <img
-      src="/icons/Combined Shape.svg"
+      src="./icons/Combined Shape.svg"
       alt="Logo Icon"
       class="absolute top-1/2 left-5 sm:left-5 md:left-6 lg:left-1/4 transform -translate-y-1/2 w-8 h-8 lg:w-12 lg:h-12"
     />
@@ -29,13 +29,13 @@
     <button class="p-2" (click)="toggleDarkMode()">
       <img
         *ngIf="!themeService.isDarkMode()"
-        src="/icons/moon.svg"
+        src="./icons/moon.svg"
         alt="Dark Mode"
         class="h-6 w-6"
       />
       <img
         *ngIf="themeService.isDarkMode()"
-        src="/icons/sun.svg"
+        src="./icons/sun.svg"
         alt="Light Mode"
         class="h-6 w-6"
       />
