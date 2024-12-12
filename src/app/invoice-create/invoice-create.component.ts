@@ -4,16 +4,20 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
+  ValidationErrors,
+  ValidatorFn,
+  AbstractControl,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { FetchApiDataService } from '../services/fetch-api-data.service';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-invoice-create',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, NgIf],
   templateUrl: './invoice-create.component.html',
   styleUrls: ['./invoice-create.component.scss'],
   providers: [DatePipe],
@@ -31,18 +35,18 @@ export class InvoiceCreateComponent {
   ) {
     this.invoiceForm = this.fb.group({
       senderAddress: this.fb.group({
-        street: [''],
-        city: [''],
-        postCode: [''],
-        country: [''],
+        street: ['', Validators.required],
+        city: ['', Validators.required],
+        postCode: ['', Validators.required],
+        country: ['', Validators.required],
       }),
       clientName: ['', Validators.required],
       clientEmail: ['', [Validators.required, Validators.email]],
       clientAddress: this.fb.group({
-        street: [''],
-        city: [''],
-        postCode: [''],
-        country: [''],
+        street: ['', Validators.required],
+        city: ['', Validators.required],
+        postCode: ['', Validators.required],
+        country: ['', Validators.required],
       }),
       createdAt: [new Date().toISOString().split('T')[0], Validators.required],
       paymentTerms: [30, Validators.required],
@@ -52,7 +56,12 @@ export class InvoiceCreateComponent {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const streetControl = this.invoiceForm.get('senderAddress')?.get('street');
+    console.log('Initial street state:', streetControl);
+    streetControl?.updateValueAndValidity();
+    console.log('After custom validator applied:', streetControl?.errors);
+  }
 
   get items(): FormArray {
     return this.invoiceForm.get('items') as FormArray;
@@ -105,11 +114,16 @@ export class InvoiceCreateComponent {
     });
   }
 
-  submitInvoice() {
+  submitInvoice(): void {
+    const streetControl = this.invoiceForm.get('senderAddress')?.get('street');
+    console.log('Street field state on submit:', streetControl);
     if (this.invoiceForm.invalid) {
-      console.error('Form is invalid');
+      this.invoiceForm.markAllAsTouched(); // Highlight invalid fields
       return;
     }
+    console.log(this.invoiceForm.get('senderAddress')?.get('street'));
+
+    console.log('Submitting invoice...', this.invoiceForm.getRawValue());
 
     const payload = this.invoiceForm.getRawValue();
     payload.status = 'pending';

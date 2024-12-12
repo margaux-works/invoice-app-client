@@ -22,7 +22,24 @@
             <input
               formControlName="street"
               class="input-field dark:bg-black dark:border-black-light border-solid dark:text-white font-bold block w-full border p-2 rounded"
+              [ngClass]="{
+                'border-red-500':
+                  invoiceForm.get('senderAddress.street')?.touched &&
+                  invoiceForm.get('senderAddress.street')?.invalid
+              }"
             />
+            <p
+              *ngIf="
+                invoiceForm.get('senderAddress')?.get('street')?.touched &&
+                invoiceForm
+                  .get('senderAddress')
+                  ?.get('street')
+                  ?.hasError('required')
+              "
+              class="text-red-500 text-sm"
+            >
+              This field is mandatory
+            </p>
           </div>
           <div class="grid grid-cols-3 gap-4">
             <div>
@@ -32,7 +49,24 @@
               <input
                 formControlName="city"
                 class="input-field dark:bg-black dark:border-black-light border-solid dark:text-white font-boldblock w-full border p-2 rounded"
+                [ngClass]="{
+                  'border-red-500':
+                    invoiceForm.get('senderAddress.city')?.touched &&
+                    invoiceForm.get('senderAddress.city')?.invalid
+                }"
               />
+              <p
+                *ngIf="
+                  invoiceForm.get('senderAddress')?.get('city')?.touched &&
+                  invoiceForm
+                    .get('senderAddress')
+                    ?.get('city')
+                    ?.hasError('required')
+                "
+                class="text-red-500 text-sm"
+              >
+                This field is mandatory
+              </p>
             </div>
             <div>
               <label class="text-gray dark:text-purple-100 block mb-1"
@@ -41,7 +75,24 @@
               <input
                 formControlName="postCode"
                 class="input-field dark:bg-black dark:border-black-light border-solid dark:text-white font-bold block w-full border p-2 rounded"
+                [ngClass]="{
+                  'border-red-500':
+                    invoiceForm.get('senderAddress.postCode')?.touched &&
+                    invoiceForm.get('senderAddress.postCode')?.invalid
+                }"
               />
+              <p
+                *ngIf="
+                  invoiceForm.get('senderAddress')?.get('postCode')?.touched &&
+                  invoiceForm
+                    .get('senderAddress')
+                    ?.get('postCode')
+                    ?.hasError('required')
+                "
+                class="text-red-500 text-sm"
+              >
+                This field is mandatory
+              </p>
             </div>
             <div>
               <label class="text-gray dark:text-purple-100 block mb-1"
@@ -50,7 +101,24 @@
               <input
                 formControlName="country"
                 class="input-field dark:bg-black dark:border-black-light border-solid dark:text-white font-bold block w-full border p-2 rounded"
+                [ngClass]="{
+                  'border-red-500':
+                    invoiceForm.get('senderAddress.country')?.touched &&
+                    invoiceForm.get('senderAddress.country')?.invalid
+                }"
               />
+              <p
+                *ngIf="
+                  invoiceForm.get('senderAddress')?.get('country')?.touched &&
+                  invoiceForm
+                    .get('senderAddress')
+                    ?.get('country')
+                    ?.hasError('required')
+                "
+                class="text-red-500 text-sm"
+              >
+                This field is mandatory
+              </p>
             </div>
           </div>
         </div>
@@ -67,8 +135,22 @@
             <input
               formControlName="clientName"
               class="input-field dark:bg-black dark:border-black-light border-solid dark:text-white font-bold block w-full border p-2 rounded"
+              [ngClass]="{
+                'border-red-500':
+                  invoiceForm.get('clientName')?.touched &&
+                  invoiceForm.get('clientName')?.invalid
+              }"
             />
           </div>
+          <p
+            *ngIf="
+              invoiceForm.get('clientName')?.touched &&
+              invoiceForm.get('clientName')?.hasError('required')
+            "
+            class="text-red-500 text-sm"
+          >
+            This field is mandatory
+          </p>
           <div>
             <label class="text-gray dark:text-purple-100 block mb-1"
               >Client's Email</label
@@ -77,7 +159,21 @@
               formControlName="clientEmail"
               type="email"
               class="input-field dark:bg-black dark:border-black-light border-solid dark:text-white font-bold block w-full border p-2 rounded"
+              [ngClass]="{
+                'border-red-500':
+                  invoiceForm.get('clientEmail')?.touched &&
+                  invoiceForm.get('clientEmail')?.invalid
+              }"
             />
+            <p
+              *ngIf="
+                invoiceForm.get('clientEmail')?.touched &&
+                invoiceForm.get('clientEmail')?.hasError('required')
+              "
+              class="text-red-500 text-sm"
+            >
+              This field is mandatory
+            </p>
           </div>
           <div formGroupName="clientAddress">
             <label class="text-gray dark:text-purple-100 block text-graymb-1"
@@ -86,7 +182,24 @@
             <input
               formControlName="street"
               class="input-field dark:bg-black dark:border-black-light border-solid dark:text-white font-bold block w-full border p-2 rounded"
+              [ngClass]="{
+                'border-red-500':
+                  invoiceForm.get('clientAddress.street')?.touched &&
+                  invoiceForm.get('clientAddress.street')?.invalid
+              }"
             />
+            <p
+              *ngIf="
+                invoiceForm.get('clientAddress')?.get('street')?.touched &&
+                invoiceForm
+                  .get('clientAddress')
+                  ?.get('street')
+                  ?.hasError('required')
+              "
+              class="text-red-500 text-sm"
+            >
+              This field is mandatory
+            </p>
             <div class="grid grid-cols-3 gap-4 mt-4">
               <div>
                 <label class="block text-gray dark:text-purple-100 mb-1"
@@ -95,7 +208,24 @@
                 <input
                   formControlName="city"
                   class="input-field dark:bg-black dark:border-black-light border-solid dark:text-white font-bold block w-full border p-2 rounded"
+                  [ngClass]="{
+                    'border-red-500':
+                      invoiceForm.get('clientAddress.city')?.touched &&
+                      invoiceForm.get('clientAddress.city')?.invalid
+                  }"
                 />
+                <p
+                  *ngIf="
+                    invoiceForm.get('clientAddress')?.get('city')?.touched &&
+                    invoiceForm
+                      .get('clientAddress')
+                      ?.get('city')
+                      ?.hasError('required')
+                  "
+                  class="text-red-500 text-sm"
+                >
+                  This field is mandatory
+                </p>
               </div>
               <div>
                 <label class="block dark:text-purple-100 text-gray mb-1"
@@ -104,7 +234,25 @@
                 <input
                   formControlName="postCode"
                   class="input-field dark:bg-black dark:border-black-light border-solid dark:text-white font-bold block w-full border p-2 rounded"
+                  [ngClass]="{
+                    'border-red-500':
+                      invoiceForm.get('clientAddress.postCode')?.touched &&
+                      invoiceForm.get('clientAddress.postCode')?.invalid
+                  }"
                 />
+                <p
+                  *ngIf="
+                    invoiceForm.get('clientAddress')?.get('postCode')
+                      ?.touched &&
+                    invoiceForm
+                      .get('clientAddress')
+                      ?.get('postCode')
+                      ?.hasError('required')
+                  "
+                  class="text-red-500 text-sm"
+                >
+                  This field is mandatory
+                </p>
               </div>
               <div>
                 <label class="block dark:text-purple-100 text-gray mb-1"
@@ -113,7 +261,21 @@
                 <input
                   formControlName="country"
                   class="input-field dark:bg-black dark:border-black-light border-solid dark:text-white font-bold block w-full border p-2 rounded"
+                  [ngClass]="{
+                    'border-red-500':
+                      invoiceForm.get('clientAddress.country')?.touched &&
+                      invoiceForm.get('clientAddress.country')?.invalid
+                  }"
                 />
+                <p
+                  *ngIf="
+                    invoiceForm.get('clientAddress.country')?.touched &&
+                    invoiceForm.get('clientAddress.country')?.invalid
+                  "
+                  class="text-red-500 text-sm"
+                >
+                  This field is mandatory
+                </p>
               </div>
             </div>
           </div>
@@ -138,7 +300,21 @@
             formControlName="paymentTerms"
             type="number"
             class="input-field dark:bg-black dark:border-black-light border-solid dark:text-white font-bold block w-full border p-2 rounded"
+            [ngClass]="{
+              'border-red-500':
+                invoiceForm.get('paymentTerms')?.touched &&
+                invoiceForm.get('paymentTerms')?.invalid
+            }"
           />
+          <p
+            *ngIf="
+              invoiceForm.get('paymentTerms')?.touched &&
+              invoiceForm.get('paymentTerms')?.invalid
+            "
+            class="text-red-500 text-sm"
+          >
+            This field is mandatory
+          </p>
         </div>
       </div>
       <div>
@@ -148,7 +324,21 @@
         <input
           formControlName="description"
           class="input-field dark:bg-black dark:border-black-light border-solid dark:text-white font-bold block w-full border p-2 rounded"
+          [ngClass]="{
+            'border-red-500':
+              invoiceForm.get('description')?.touched &&
+              invoiceForm.get('description')?.invalid
+          }"
         />
+        <p
+          *ngIf="
+            invoiceForm.get('description')?.touched &&
+            invoiceForm.get('description')?.invalid
+          "
+          class="text-red-500 text-sm"
+        >
+          This field is mandatory
+        </p>
       </div>
 
       <!-- Item List -->
