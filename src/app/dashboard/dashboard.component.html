@@ -48,19 +48,19 @@
         </button>
         <div
           *ngIf="showFilterDropdown"
-          class="absolute bg-white dark:bg-black-light shadow-md rounded mt-2 p-4 w-[160px] items-center"
+          class="absolute bg-white dark:bg-black-light shadow-md mt-2 p-4 w-[160px] items-center rounded-lg"
         >
           <label
             *ngFor="let status of ['draft', 'pending', 'paid']"
-            class="block mb-2 items-center space-x-4 dark:text-white"
+            class="flex items-center mb-2 space-x-3 dark:text-white cursor-pointer"
           >
             <input
               type="checkbox"
               [value]="status"
               (change)="onStatusChange(status, $event.target.checked)"
-              class="appearance-none w-5 h-5 bg-purple-100 rounded border border-transparent hover:border-purple checked:bg-purple checked:border-white checked:appearance-none"
+              class="appearance-none w-5 h-5 bg-purple-100 rounded border border-transparent hover:border-purple checked:bg-purple checked:border-white checked:appearance-none checked:bg-[url('/icons/check.svg')] checked:bg-center checked:bg-no-repeat"
             />
-            {{ status | titlecase }}
+            <span class="mt-1"> {{ status | titlecase }}</span>
           </label>
         </div>
       </div>
