@@ -110,4 +110,4 @@ In future projects, I aim to:
 
 ## Acknowledgments
 
-Special thanks to Frontend Mentor for providing this challenge, and to the developers behind pdfMake for their intuitive library. I also appreciate feedback my mentor Faizal through the development process.
+Special thanks to Frontend Mentor for providing this challenge, and to the developers behind pdfMake for their intuitive library. I also appreciate the feedback from my mentor Faizal through the development process :handshake:	
